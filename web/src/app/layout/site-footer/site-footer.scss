@@ -1,0 +1,82 @@
+@use "styles/tokens" as *;
+@use "styles/mixins" as *;
+
+:host {
+	display: block;
+	border-top: 1px solid $bq-border-subtle;
+	background-color: $bq-surface-sunken;
+}
+
+.inner {
+	@include container;
+
+	display: grid;
+	gap: $bq-space-8;
+	padding-block: $bq-space-10 $bq-space-8;
+	grid-template-columns: 1fr;
+
+	@include from("md") {
+		grid-template-columns: 1.6fr 1fr 1.4fr;
+		gap: $bq-space-9;
+	}
+}
+
+.about {
+	display: flex;
+	max-width: 42ch;
+	flex-direction: column;
+	gap: $bq-space-4;
+}
+
+.blurb {
+	margin: 0;
+	color: $bq-text-muted;
+	font-family: $bq-font-family-body;
+	font-size: $bq-font-size-2xs;
+	letter-spacing: $bq-font-tracking-wide;
+	line-height: $bq-font-leading-normal;
+}
+
+.column {
+	display: flex;
+	flex-direction: column;
+	gap: $bq-space-3;
+}
+
+.column-title {
+	margin: 0 0 $bq-space-1;
+	color: $bq-text-primary;
+	font-family: $bq-font-family-display;
+	font-size: $bq-font-size-sm;
+	font-weight: $bq-font-weight-semibold;
+	letter-spacing: $bq-font-tracking-wider;
+	text-transform: uppercase;
+}
+
+.column-link,
+.column-text {
+	margin: 0;
+	color: $bq-text-muted;
+	font-family: $bq-font-family-display;
+	font-size: $bq-font-size-sm;
+	letter-spacing: $bq-font-tracking-wider;
+	transition: color $bq-duration-fast $bq-easing-standard;
+}
+
+.column-link:hover {
+	color: $bq-accent-base;
+}
+
+.baseline {
+	@include container;
+
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: $bq-space-3;
+	padding-block: $bq-space-5;
+	border-top: 1px solid $bq-border-subtle;
+	color: $bq-accent-text;
+	font-family: $bq-font-family-label;
+	font-size: $bq-font-size-sm;
+}

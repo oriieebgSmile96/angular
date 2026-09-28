@@ -1,0 +1,13 @@
+@use "tokens" as *;
+
+/**
+ * The controls in `shared/components/forms` style themselves, so the only thing
+ * left global is the inline error face, which plain markup still uses.
+ */
+.bq-error {
+	display: flex;
+	align-items: center;
+	gap: $bq-space-2;
+	color: $bq-state-danger;
+	font-size: $bq-font-size-3xs;
+}

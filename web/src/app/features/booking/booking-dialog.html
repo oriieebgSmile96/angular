@@ -1,0 +1,39 @@
+<section class="dialog" role="dialog" aria-modal="true" aria-labelledby="bq-booking-title">
+	<button class="close" type="button" [attr.aria-label]="'booking.close' | t" (click)="close()">
+		<bq-icon name="close" [size]="20" [strokeWidth]="1.8" />
+	</button>
+
+	@if (step() !== "summary") {
+		<bq-stepper class="stepper" [labels]="stepLabels" [activeIndex]="activeIndex()" />
+	}
+
+	<div class="body">
+		@switch (step()) {
+			@case ("details") {
+				<bq-details-step [form]="form" [pending]="pending()" (submitted)="sendCode()" />
+			}
+			@case ("verify") {
+				<bq-verify-step
+					[maskedMobile]="maskedMobile()"
+					[expiresAt]="expiresAt()"
+					[pending]="pending()"
+					[error]="error()"
+					[demoCode]="demoCode()"
+					(verified)="verify($event)"
+					(resendRequested)="resendCode()"
+					(editRequested)="editNumber()" />
+			}
+			@case ("confirmed") {
+				<bq-confirmed-step (dismissed)="close()" (detailsRequested)="showSummary()" />
+			}
+			@case ("summary") {
+				@if (booking(); as confirmed) {
+					<bq-summary-step
+						[booking]="confirmed"
+						(portfolioRequested)="close('portfolio')"
+						(calendarRequested)="addToCalendar()" />
+				}
+			}
+		}
+	</div>
+</section>

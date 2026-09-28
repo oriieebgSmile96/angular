@@ -1,0 +1,11 @@
+@if (!failed()) {
+	<img
+		[src]="src()"
+		[alt]="alt()"
+		[attr.loading]="eager() ? 'eager' : 'lazy'"
+		[attr.fetchpriority]="eager() ? 'high' : 'auto'"
+		decoding="async"
+		[class.is-loaded]="loaded()"
+		(load)="loaded.set(true)"
+		(error)="failed.set(true)" />
+}

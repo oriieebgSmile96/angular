@@ -1,0 +1,7 @@
+@use "styles/control" as *;
+
+:host {
+	@include control-host;
+}
+
+@include control-shell;

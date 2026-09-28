@@ -1,0 +1,31 @@
+@use "styles/tokens" as *;
+
+:host {
+	display: flex;
+	min-height: 100dvh;
+	flex-direction: column;
+	background-color: $bq-surface-page;
+}
+
+main {
+	flex: 1;
+}
+
+.skip-link {
+	position: absolute;
+	top: $bq-space-3;
+	inset-inline-start: $bq-space-3;
+	z-index: $bq-z-toast;
+	padding: $bq-space-3 $bq-space-5;
+	background-color: $bq-accent-strong;
+	color: $bq-text-on-accent;
+	font-size: $bq-font-size-xs;
+	letter-spacing: $bq-font-tracking-wider;
+	text-transform: uppercase;
+	transform: translateY(-200%);
+	transition: transform $bq-duration-fast $bq-easing-standard;
+
+	&:focus-visible {
+		transform: none;
+	}
+}

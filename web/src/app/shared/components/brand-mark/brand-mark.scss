@@ -1,0 +1,36 @@
+@use "styles/tokens" as *;
+
+:host {
+	display: inline-flex;
+	align-items: center;
+	gap: $bq-space-3;
+	color: $bq-accent-base;
+}
+
+.seal {
+	width: 48px;
+	height: 48px;
+	object-fit: contain;
+}
+
+.words {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.latin {
+	color: $bq-accent-text;
+	font-family: $bq-font-family-label;
+	font-size: $bq-font-size-xs;
+	line-height: $bq-font-leading-snug;
+	white-space: nowrap;
+}
+
+.arabic {
+	color: $bq-text-primary;
+	font-family: $bq-font-family-label;
+	font-size: $bq-font-size-xs;
+	font-weight: $bq-font-weight-medium;
+	line-height: $bq-font-leading-snug;
+}

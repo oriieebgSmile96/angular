@@ -1,0 +1,25 @@
+<ol class="steps" role="list">
+	@for (label of labels(); track label; let index = $index, last = $last) {
+		<li
+			class="step"
+			[class.is-active]="index === activeIndex()"
+			[class.is-done]="index < activeIndex()"
+			[attr.aria-current]="index === activeIndex() ? 'step' : null">
+			<span class="seal">
+				@if (index < activeIndex()) {
+					<bq-icon name="check" [size]="16" [strokeWidth]="2" />
+				} @else {
+					{{ index + 1 }}
+				}
+			</span>
+			<span class="label">{{ label | t }}</span>
+			@if (!last) {
+				<span class="line" aria-hidden="true"></span>
+			}
+		</li>
+	}
+</ol>
+<p class="bq-visually-hidden" aria-live="polite">
+	{{ "booking.step.progress" | t: { current: activeIndex() + 1, total: labels().length } }}:
+	{{ currentLabel() | t }}
+</p>

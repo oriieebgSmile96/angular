@@ -1,0 +1,60 @@
+<header class="intro">
+	<p class="bq-eyebrow" bqReveal>{{ "boards.eyebrow" | t }}</p>
+	<h2 class="bq-section-heading" bqReveal="rise" [bqRevealDelay]="60">
+		{{ "boards.heading" | t }}
+	</h2>
+	<p class="bq-lede" bqReveal [bqRevealDelay]="120">{{ "boards.lede" | t }}</p>
+</header>
+
+<ul class="samples">
+	@for (card of cards(); track card.id) {
+		<li class="card" bqReveal="scale" [bqRevealIndex]="$index" [bqRevealDelay]="120">
+			<div class="swatch" [style.background-color]="card.swatchColor">
+				@if (card.approved) {
+					<!-- The footer bar states the same sign-off in full, so the pill is decoration. -->
+					<span class="pill" aria-hidden="true">{{ "boards.approved" | t }}</span>
+				}
+			</div>
+
+			<div class="detail">
+				<p class="bq-micro-label">{{ card.brand | t }}</p>
+				<!-- Every sample carries the same product name, so the finish is what
+				     tells one card — and one approve button — from the next. -->
+				<h3 class="name" [id]="card.nameId">
+					{{ card.name | t }}
+					<span class="finish">{{ card.finish | t }}</span>
+				</h3>
+
+				<ul class="specs" [attr.aria-label]="'boards.specsLabel' | t">
+					@for (spec of card.specs; track spec) {
+						<li class="spec">{{ spec | t }}</li>
+					}
+				</ul>
+			</div>
+
+			@if (card.approved) {
+				<p
+					#action
+					class="action approved"
+					[class.action--just-approved]="card.justApproved"
+					[id]="card.actionId"
+					tabindex="-1">
+					<bq-icon name="check" [size]="16" [strokeWidth]="2" />
+					{{ "boards.approvedOn" | t: { date: card.approvedOn } }}
+				</p>
+			} @else {
+				<button
+					#action
+					type="button"
+					class="action bq-button bq-button--primary"
+					[id]="card.actionId"
+					[attr.aria-labelledby]="card.labelledBy"
+					(click)="approve(card)">
+					{{ "boards.approve" | t }}
+				</button>
+			}
+		</li>
+	}
+</ul>
+
+<p class="announcement" role="status">{{ announcement() }}</p>

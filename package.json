@@ -1,0 +1,38 @@
+{
+	"name": "bareeq",
+	"version": "0.1.0",
+	"private": true,
+	"description": "Bareeq Al-Aeeq - prestige interior atelier. Angular web experience + Expo mobile app sharing one design-token source of truth.",
+	"scripts": {
+		"tokens": "node shared/design-tokens/generate.mjs",
+		"tokens:check": "node shared/design-tokens/generate.mjs --check",
+		"install:all": "npm --prefix web install && npm --prefix portal install && npm --prefix mobile install",
+		"web": "npm --prefix web run start",
+		"web:build": "npm --prefix web run build",
+		"web:lint": "npm --prefix web run lint",
+		"web:typecheck": "npm --prefix web run typecheck",
+		"web:test": "npm --prefix web run test",
+		"portal": "npm --prefix portal run start",
+		"portal:build": "npm --prefix portal run build",
+		"portal:lint": "npm --prefix portal run lint",
+		"portal:typecheck": "npm --prefix portal run typecheck",
+		"portal:test": "npm --prefix portal run test",
+		"icons": "npm --prefix web run icons && npm --prefix portal run icons",
+		"icons:check": "npm --prefix web run icons:check && npm --prefix portal run icons:check",
+		"mobile": "npm --prefix mobile run start",
+		"mobile:web": "npm --prefix mobile run web",
+		"mobile:typecheck": "npm --prefix mobile run typecheck",
+		"mobile:lint": "npm --prefix mobile run lint",
+		"format": "prettier --write \"shared/**/*.{mjs,json}\" \"*.{json,md}\"",
+		"check": "npm run tokens:check && npm run icons:check && npm run web:lint && npm run web:typecheck && npm run web:test && npm run portal:lint && npm run portal:typecheck && npm run portal:test && npm run mobile:typecheck && npm run mobile:lint",
+		"clean": "node scripts/clean.mjs",
+		"clean:deps": "node scripts/clean.mjs --deps",
+		"reset": "npm run clean:deps && npm run install:all && npm run tokens"
+	},
+	"devDependencies": {
+		"prettier": "^3.6.2"
+	},
+	"engines": {
+		"node": ">=20.19.0"
+	}
+}

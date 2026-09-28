@@ -1,0 +1,158 @@
+@use "sass:map";
+@use "tokens" as *;
+
+$breakpoints: (
+	"xs": $bq-breakpoint-xs,
+	"sm": $bq-breakpoint-sm,
+	"md": $bq-breakpoint-md,
+	"lg": $bq-breakpoint-lg,
+	"xl": $bq-breakpoint-xl,
+);
+
+/// Mobile-first: styles apply from the given breakpoint upwards.
+@mixin from($name) {
+	@media (min-width: map.get($breakpoints, $name)) {
+		@content;
+	}
+}
+
+/// Styles apply below the given breakpoint.
+@mixin until($name) {
+	@media (max-width: (map.get($breakpoints, $name) - 1px)) {
+		@content;
+	}
+}
+
+@mixin container($max: $bq-layout-container-max) {
+	width: 100%;
+	max-width: $max;
+	margin-inline: auto;
+	padding-inline: $bq-space-5;
+
+	@include from("md") {
+		padding-inline: $bq-space-7;
+	}
+}
+
+/// Small-caps section label. Playfair Display SC 16 / 1.28 tracking.
+@mixin eyebrow($color: $bq-accent-text) {
+	margin: 0;
+	color: $color;
+	font-family: $bq-font-family-display-sc;
+	font-size: $bq-font-size-sm;
+	font-weight: $bq-font-weight-regular;
+	letter-spacing: $bq-font-tracking-wider;
+	line-height: $bq-font-leading-normal;
+	text-transform: uppercase;
+}
+
+/// Editorial serif headline. Playfair Display black with generous tracking.
+@mixin display($size: $bq-font-size-2xl, $tracking: $bq-font-tracking-widest) {
+	margin: 0;
+	font-family: $bq-font-family-display;
+	font-size: $size;
+	font-weight: $bq-font-weight-black;
+	letter-spacing: $tracking;
+	line-height: $bq-font-leading-normal;
+}
+
+/// Uppercase serif button and micro-label face. Playfair, not Playfair Display.
+@mixin label-face($size: $bq-font-size-sm, $weight: $bq-font-weight-bold) {
+	font-family: $bq-font-family-label;
+	font-size: $size;
+	font-weight: $weight;
+	text-transform: uppercase;
+}
+
+/// Small-caps micro-label: table headers, "Completion", "Payment Schedule".
+@mixin micro-label($color: $bq-accent-text) {
+	margin: 0;
+	color: $color;
+	font-family: $bq-font-family-display-sc;
+	font-size: $bq-font-size-2xs;
+	font-weight: $bq-font-weight-regular;
+	letter-spacing: $bq-font-tracking-micro;
+	line-height: $bq-font-leading-normal;
+	text-transform: uppercase;
+}
+
+/// Brushed-gold fill for emphasised words inside a headline.
+@mixin gold-text {
+	background: $bq-accent-sheen;
+	background-clip: text;
+	color: transparent;
+	-webkit-text-fill-color: transparent;
+}
+
+@mixin hairline($color: $bq-border-subtle) {
+	border: 0;
+	border-top: 1px solid $color;
+}
+
+@mixin focus-ring($color: $bq-accent-base, $offset: 3px) {
+	&:focus-visible {
+		outline: 2px solid $color;
+		outline-offset: $offset;
+	}
+}
+
+/// Hide visually but keep it available to assistive technology.
+@mixin visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+@mixin section-padding {
+	padding-block: $bq-space-10;
+
+	@include from("md") {
+		padding-block: $bq-space-12;
+	}
+}
+
+@mixin scrollbar-hidden {
+	scrollbar-width: none;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+/// The portal's card: a lifted surface inside a faint gold rim.
+///
+/// Figma draws this as a flat grey at 35% opacity with a gold stroke, which only
+/// works over the one dark page it was drawn on. Mixing the accent into the
+/// surface instead keeps the same weight on paper stock.
+@mixin panel($tint: 4%, $rim: 22%) {
+	border: 1px solid color-mix(in srgb, $bq-accent-base $rim, transparent);
+	border-radius: $bq-radius-panel;
+	background-color: color-mix(in srgb, $bq-accent-base $tint, $bq-surface-raised);
+}
+
+/// A hairline in the same gold family as the panel rims.
+@mixin gold-rule($opacity: 12%) {
+	border: 0;
+	border-top: 1px solid color-mix(in srgb, $bq-accent-base $opacity, transparent);
+}
+
+/// Small pill carrying a status or a spec, e.g. "12.5mm" or "AWAITING PAYMENT".
+@mixin chip($radius: $bq-radius-sm) {
+	display: inline-flex;
+	gap: $bq-space-1;
+	align-items: center;
+	padding: 5px $bq-space-2;
+	border: 1px solid color-mix(in srgb, $bq-accent-base 35%, transparent);
+	border-radius: $radius;
+	background-color: color-mix(in srgb, $bq-accent-base 12%, transparent);
+	color: $bq-accent-text;
+	font-family: $bq-font-family-label;
+	font-size: $bq-font-size-2xs;
+	line-height: 1.2;
+	white-space: nowrap;
+}

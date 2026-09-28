@@ -1,0 +1,60 @@
+@use "styles/tokens" as *;
+@use "styles/mixins" as *;
+
+:host {
+	display: block;
+}
+
+.dialog {
+	position: relative;
+	width: min(720px, calc(100vw - #{$bq-space-6}));
+	max-height: calc(100dvh - #{$bq-space-8});
+	padding: $bq-space-8 $bq-space-6 $bq-space-7;
+	overflow-y: auto;
+	background-color: $bq-surface-overlay;
+	box-shadow: $bq-shadow-lg;
+	animation: dialog-in $bq-duration-base $bq-easing-luxe both;
+
+	@include from("sm") {
+		padding: $bq-space-8 $bq-space-9 $bq-space-8;
+	}
+}
+
+.close {
+	position: absolute;
+	top: $bq-space-4;
+	inset-inline-end: $bq-space-4;
+	display: grid;
+	width: 36px;
+	height: 36px;
+	place-items: center;
+	color: $bq-text-secondary;
+	transition: color $bq-duration-fast $bq-easing-standard;
+
+	@include focus-ring($bq-accent-base, 2px);
+
+	&:hover {
+		color: $bq-text-primary;
+	}
+}
+
+.stepper {
+	display: block;
+	margin-bottom: $bq-space-7;
+}
+
+.body {
+	min-height: 200px;
+}
+
+@keyframes dialog-in {
+	from {
+		opacity: 0;
+		transform: translateY(18px) scale(0.985);
+	}
+
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}

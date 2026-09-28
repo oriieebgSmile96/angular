@@ -1,0 +1,183 @@
+@use "tokens" as *;
+@use "mixins" as *;
+
+/**
+ * The shared shell for every form control in the kit — input, select, datepicker.
+ *
+ * Component styles are scoped, so each control `@include control-shell` rather
+ * than inheriting from a global class. That keeps one definition of the field
+ * chrome while letting each control add its own trigger behaviour.
+ */
+@mixin control-shell {
+	.bq-control {
+		position: relative;
+		display: flex;
+		overflow: hidden;
+		min-height: 52px;
+		align-items: center;
+		gap: $bq-space-2;
+		padding-inline: $bq-space-4;
+		border: 1px solid $bq-border-subtle;
+		border-radius: $bq-radius-control;
+		background-color: $bq-surface-raised;
+		transition:
+			border-color $bq-duration-fast $bq-easing-standard,
+			background-color $bq-duration-fast $bq-easing-standard;
+
+		// Accent underline that scales in from the centre on focus.
+		&::after {
+			position: absolute;
+			inset-inline: 0;
+			bottom: 0;
+			height: 2px;
+			border-radius: 0;
+			background-color: $bq-accent-base;
+			content: "";
+			opacity: 0;
+			transform: scaleX(0);
+			transform-origin: center;
+			transition:
+				transform $bq-duration-fast $bq-easing-standard,
+				opacity $bq-duration-fast $bq-easing-standard;
+			pointer-events: none;
+		}
+
+		&:hover:not(.is-disabled):not(.is-readonly):not(.is-invalid) {
+			border-color: $bq-border-accent;
+		}
+
+		&.is-invalid:hover:not(.is-disabled):not(.is-readonly) {
+			border-color: $bq-state-danger;
+		}
+
+		&:focus-within:not(.is-disabled):not(.is-readonly):not(.is-invalid) {
+			border-color: $bq-accent-base;
+
+			&::after {
+				opacity: 1;
+				transform: scaleX(1);
+			}
+		}
+
+		// While the pointer is down the line reads as half-drawn, then finishes on
+		// release. Inputs put `:active` on the inner field; select and datepicker
+		// put it on the shell.
+		&:focus-within:not(.is-disabled):not(.is-readonly):not(.is-invalid):has(:active)::after,
+		&:focus-within:not(.is-disabled):not(.is-readonly):not(.is-invalid):active::after {
+			transform: scaleX(0.5);
+		}
+
+		&.is-invalid:focus-within:not(.is-disabled):not(.is-readonly) {
+			border-color: $bq-state-danger;
+
+			&::after {
+				background-color: $bq-state-danger;
+				opacity: 1;
+				transform: scaleX(1);
+			}
+		}
+
+		&.is-invalid:focus-within:not(.is-disabled):not(.is-readonly):has(:active)::after,
+		&.is-invalid:focus-within:not(.is-disabled):not(.is-readonly):active::after {
+			transform: scaleX(0.5);
+		}
+
+		&.is-invalid {
+			border-color: $bq-state-danger;
+		}
+
+		&.is-disabled {
+			background-color: $bq-surface-sunken;
+			opacity: 0.7;
+			cursor: not-allowed;
+		}
+
+		&.is-textarea {
+			align-items: stretch;
+			padding-block: $bq-space-3;
+		}
+	}
+
+	.bq-control__input {
+		width: 100%;
+		min-width: 0;
+		border: 0;
+		background: none;
+		color: $bq-text-primary;
+		font-family: $bq-font-family-body;
+		font-size: $bq-font-size-xs;
+		letter-spacing: $bq-font-tracking-body;
+		outline: none;
+
+		&::placeholder {
+			color: $bq-text-faint;
+		}
+
+		&--textarea {
+			min-height: 96px;
+			line-height: $bq-font-leading-normal;
+			resize: vertical;
+		}
+	}
+
+	.bq-control__lead,
+	.bq-control__trail {
+		display: flex;
+		flex-shrink: 0;
+		align-items: center;
+		gap: $bq-space-2;
+		color: $bq-text-muted;
+
+		&:empty {
+			display: none;
+		}
+	}
+
+	.bq-control__toggle {
+		display: grid;
+		place-items: center;
+		color: $bq-text-muted;
+		cursor: pointer;
+
+		@include focus-ring($bq-accent-base, 2px);
+
+		&:hover:not(:disabled) {
+			color: $bq-accent-text;
+		}
+	}
+
+	.bq-control__hint {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		gap: $bq-space-3;
+		margin: 0;
+		padding-block-start: $bq-space-1;
+		color: $bq-text-muted;
+		font-family: $bq-font-family-body;
+		font-size: $bq-font-size-3xs;
+		letter-spacing: $bq-font-tracking-micro;
+		line-height: $bq-font-leading-normal;
+		text-align: start;
+	}
+
+	.bq-control__counter {
+		flex-shrink: 0;
+	}
+}
+
+/// Vertical rhythm shared by the label / control / message stack.
+@mixin control-host {
+	display: flex;
+	flex-direction: column;
+	gap: $bq-space-2;
+}
+
+/// The floating panel used by select and datepicker.
+@mixin control-panel {
+	overflow: hidden;
+	border: 1px solid $bq-border-subtle;
+	border-radius: $bq-radius-control;
+	background-color: $bq-surface-overlay;
+	box-shadow: $bq-shadow-lg;
+}

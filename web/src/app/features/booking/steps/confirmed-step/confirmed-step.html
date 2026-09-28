@@ -1,0 +1,16 @@
+<span class="seal" aria-hidden="true">
+	<bq-icon name="check" [size]="26" [strokeWidth]="2" />
+</span>
+
+<p class="bq-eyebrow">{{ "booking.confirmed.eyebrow" | t }}</p>
+<h2 id="bq-booking-title" class="title">{{ "booking.confirmed.title" | t }}</h2>
+<p class="lede">{{ "booking.confirmed.lede" | t }}</p>
+
+<div class="actions">
+	<button bqButton="primary" type="button" (click)="dismissed.emit()">
+		{{ "booking.confirmed.home" | t }}
+	</button>
+	<button bqButton="outline" type="button" (click)="detailsRequested.emit()">
+		{{ "booking.confirmed.details" | t }}
+	</button>
+</div>

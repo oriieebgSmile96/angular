@@ -1,0 +1,54 @@
+<div class="bar">
+	<a class="brand" routerLink="/" fragment="top" [attr.aria-label]="'header.home' | t">
+		<bq-brand-mark [showWords]="false" />
+	</a>
+
+	<nav class="nav" [attr.aria-label]="'a11y.primaryNav' | t">
+		@for (link of links; track link.fragment) {
+			<a class="nav-link" routerLink="/" [fragment]="link.fragment" (click)="menuOpen.set(false)">
+				{{ link.label | t }}
+			</a>
+		}
+	</nav>
+
+	<div class="actions">
+		<button bqButton="primary" size="sm" type="button" (click)="bookConsultation()">
+			{{ "header.bookNow" | t }}
+		</button>
+
+		<button
+			class="icon-action"
+			type="button"
+			[attr.aria-label]="(theme.isDark() ? 'theme.toLight' : 'theme.toDark') | t"
+			(click)="theme.toggle()">
+			<bq-icon [name]="theme.isDark() ? 'sun' : 'moon'" [size]="18" />
+		</button>
+
+		<button
+			class="lang"
+			type="button"
+			[attr.lang]="nextLanguage()"
+			[attr.aria-label]="'language.switch' | t"
+			(click)="i18n.toggle()">
+			{{ nextLanguageLabel() }}
+		</button>
+
+		<button
+			class="menu-toggle"
+			type="button"
+			[attr.aria-expanded]="menuOpen()"
+			aria-controls="bq-mobile-nav"
+			[attr.aria-label]="(menuOpen() ? 'header.closeMenu' : 'header.openMenu') | t"
+			(click)="toggleMenu()">
+			<bq-icon [name]="menuOpen() ? 'close' : 'menu'" [size]="22" />
+		</button>
+	</div>
+</div>
+
+<nav id="bq-mobile-nav" class="mobile-nav" [attr.aria-label]="'a11y.primaryNav' | t" [hidden]="!menuOpen()">
+	@for (link of links; track link.fragment) {
+		<a class="mobile-link" routerLink="/" [fragment]="link.fragment" (click)="menuOpen.set(false)">
+			{{ link.label | t }}
+		</a>
+	}
+</nav>

@@ -1,0 +1,90 @@
+<bq-field-label [text]="label()" [htmlFor]="inputId" [labelId]="inputId + '-label'" [required]="isRequired" />
+
+<button
+	class="bq-control bq-select__trigger"
+	type="button"
+	cdkOverlayOrigin
+	#trigger="cdkOverlayOrigin"
+	[id]="inputId"
+	[disabled]="isDisabled"
+	[class.is-invalid]="isInvalid"
+	[class.is-disabled]="isDisabled"
+	[class.is-open]="isOpen()"
+	role="combobox"
+	[attr.aria-haspopup]="'listbox'"
+	[attr.aria-expanded]="isOpen()"
+	[attr.aria-controls]="listboxId"
+	[attr.aria-activedescendant]="isOpen() && activeIndex() >= 0 ? optionId(activeIndex()) : null"
+	[attr.aria-labelledby]="inputId + '-label'"
+	[attr.aria-required]="isRequired || null"
+	[attr.aria-invalid]="isInvalid || null"
+	[attr.aria-describedby]="describedBy ?? hintId"
+	(click)="toggle()"
+	(keydown)="onTriggerKeydown($event)">
+	<span class="bq-select__value" [class.is-placeholder]="!selected">
+		@if (selected; as option) {
+			{{ option.label | t }}
+		} @else {
+			{{ placeholder() || ("select.placeholder" | t) }}
+		}
+	</span>
+
+	<span class="bq-control__trail">
+		@if (showClear() && selected) {
+			<span
+				class="bq-control__toggle"
+				role="button"
+				tabindex="0"
+				[attr.aria-label]="'select.clear' | t"
+				(pointerdown)="clear($event)"
+				(click)="clear($event)"
+				(keydown.enter)="clear($event)"
+				(keydown.space)="clear($event)">
+				<bq-icon name="close" [size]="14" [strokeWidth]="2" />
+			</span>
+		}
+		<bq-icon class="bq-select__caret" name="chevron-down" [size]="18" />
+	</span>
+</button>
+
+@if (isInvalid) {
+	<bq-inline-error [message]="control.errors | validationMessage" [errorId]="errorId" />
+} @else if (hint()) {
+	<p class="bq-control__hint" [id]="hintId"><span>{{ hint() }}</span></p>
+}
+
+<ng-template
+	cdkConnectedOverlay
+	[cdkConnectedOverlayOrigin]="trigger"
+	[cdkConnectedOverlayOpen]="isOpen()"
+	[cdkConnectedOverlayPositions]="panelPositions"
+	[cdkConnectedOverlayWidth]="trigger.elementRef.nativeElement.offsetWidth"
+	cdkConnectedOverlayHasBackdrop
+	cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+	(backdropClick)="close()"
+	(detach)="close()">
+	<ul class="bq-select__panel" role="listbox" [id]="listboxId" [attr.aria-labelledby]="inputId + '-label'">
+		@for (option of options(); track option.id) {
+			<li
+				class="bq-select__option"
+				role="option"
+				tabindex="-1"
+				[id]="optionId($index)"
+				[class.is-selected]="option.id === selected?.id"
+				[class.is-active]="$index === activeIndex()"
+				[class.is-disabled]="option.disabled"
+				[attr.aria-selected]="option.id === selected?.id"
+				[attr.aria-disabled]="option.disabled || null"
+				(click)="choose(option)"
+				(keydown.enter)="choose(option)"
+				(mouseenter)="activeIndex.set($index)">
+				<span class="bq-select__option-label">{{ option.label | t }}</span>
+				@if (option.description; as description) {
+					<span class="bq-select__option-description">{{ description | t }}</span>
+				}
+			</li>
+		} @empty {
+			<li class="bq-select__empty">{{ "select.empty" | t }}</li>
+		}
+	</ul>
+</ng-template>

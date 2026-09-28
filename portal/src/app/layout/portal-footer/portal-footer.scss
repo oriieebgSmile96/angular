@@ -1,0 +1,18 @@
+@use "styles/tokens" as *;
+
+:host {
+	display: flex;
+	gap: $bq-space-4;
+	flex-wrap: wrap;
+	align-items: baseline;
+	justify-content: space-between;
+	padding-block-start: $bq-space-8;
+	border-block-start: 1px solid color-mix(in srgb, $bq-accent-base 25%, transparent);
+}
+
+p {
+	margin: 0;
+	color: $bq-accent-text;
+	font-family: $bq-font-family-label;
+	font-size: $bq-font-size-sm;
+}

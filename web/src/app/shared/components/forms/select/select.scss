@@ -1,0 +1,101 @@
+@use "styles/tokens" as *;
+@use "styles/mixins" as *;
+@use "styles/control" as *;
+
+:host {
+	@include control-host;
+}
+
+@include control-shell;
+
+.bq-select__trigger {
+	width: 100%;
+	justify-content: space-between;
+	text-align: start;
+	cursor: pointer;
+
+	&.is-open {
+		border-color: $bq-border-accent;
+	}
+}
+
+.bq-select__value {
+	flex: 1;
+	min-width: 0;
+	overflow: hidden;
+	color: $bq-text-primary;
+	font-family: $bq-font-family-body;
+	font-size: $bq-font-size-xs;
+	letter-spacing: $bq-font-tracking-body;
+	text-align: start;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	&.is-placeholder {
+		color: $bq-text-faint;
+	}
+}
+
+.bq-select__caret {
+	transition: transform $bq-duration-fast $bq-easing-standard;
+
+	.is-open & {
+		transform: rotate(180deg);
+	}
+}
+
+/* The panel is moved into the CDK overlay container, but it is still declared in
+   this component's template, so emulated encapsulation reaches it. */
+.bq-select__panel {
+	@include control-panel;
+	@include scrollbar-hidden;
+
+	max-height: 280px;
+	margin: 0;
+	padding: $bq-space-1;
+	overflow-y: auto;
+	list-style: none;
+}
+
+.bq-select__option {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	padding: $bq-space-3 $bq-space-4;
+	border-radius: $bq-radius-md;
+	cursor: pointer;
+
+	&.is-active {
+		background-color: $bq-surface-sunken;
+	}
+
+	&.is-selected {
+		background-color: $bq-accent-soft;
+	}
+
+	&.is-disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
+}
+
+.bq-select__option-label {
+	color: $bq-text-primary;
+	font-family: $bq-font-family-body;
+	font-size: $bq-font-size-xs;
+	font-weight: $bq-font-weight-medium;
+}
+
+.bq-select__option-description {
+	color: $bq-text-muted;
+	font-family: $bq-font-family-body;
+	font-size: $bq-font-size-2xs;
+}
+
+.bq-select__empty {
+	padding: $bq-space-4;
+	color: $bq-text-muted;
+	font-family: $bq-font-family-body;
+	font-size: $bq-font-size-2xs;
+	text-align: center;
+}

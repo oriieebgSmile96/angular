@@ -1,0 +1,58 @@
+@use "styles/tokens" as *;
+@use "styles/mixins" as *;
+
+:host {
+	@include section-padding;
+
+	display: block;
+	background-color: $bq-surface-sunken;
+}
+
+.inner {
+	@include container;
+
+	display: grid;
+	align-items: center;
+	gap: $bq-space-8;
+	grid-template-columns: 1fr;
+
+	@include from("md") {
+		grid-template-columns: 1.15fr 1fr;
+		gap: $bq-space-10;
+	}
+}
+
+.copy {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: $bq-space-4;
+	color: $bq-text-primary;
+}
+
+.highlights {
+	display: flex;
+	flex-direction: column;
+	gap: $bq-space-3;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+
+	li {
+		display: flex;
+		align-items: flex-start;
+		gap: $bq-space-3;
+		color: $bq-text-secondary;
+		font-size: $bq-font-size-sm;
+	}
+
+	bq-icon {
+		margin-top: 2px;
+		color: $bq-accent-base;
+	}
+}
+
+.visual {
+	width: 100%;
+	box-shadow: $bq-shadow-lg;
+}

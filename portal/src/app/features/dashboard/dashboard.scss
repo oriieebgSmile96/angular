@@ -1,0 +1,6 @@
+@use "styles/tokens" as *;
+
+:host {
+	display: grid;
+	gap: $bq-space-10;
+}

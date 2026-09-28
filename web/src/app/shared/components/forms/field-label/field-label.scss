@@ -1,0 +1,27 @@
+@use "styles/tokens" as *;
+
+:host {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.bq-field-label__text {
+	color: $bq-text-primary;
+	font-family: $bq-font-family-body;
+	font-size: $bq-font-size-sm;
+	font-weight: $bq-font-weight-medium;
+	letter-spacing: $bq-font-tracking-wider;
+}
+
+.bq-field-label__star {
+	margin-inline-start: 2px;
+	color: $bq-state-danger;
+}
+
+.bq-field-label__sub {
+	color: $bq-text-muted;
+	font-family: $bq-font-family-body;
+	font-size: $bq-font-size-2xs;
+	letter-spacing: $bq-font-tracking-wide;
+}

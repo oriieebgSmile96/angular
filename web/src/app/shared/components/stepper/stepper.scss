@@ -1,0 +1,84 @@
+@use "styles/tokens" as *;
+@use "styles/mixins" as *;
+
+:host {
+	display: block;
+}
+
+.steps {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.step {
+	display: flex;
+	align-items: center;
+	gap: $bq-space-3;
+	color: $bq-text-muted;
+	font-size: $bq-font-size-2xs;
+	letter-spacing: $bq-font-tracking-wider;
+	text-transform: uppercase;
+	white-space: nowrap;
+}
+
+.seal {
+	display: grid;
+	width: 38px;
+	height: 38px;
+	flex: none;
+	place-items: center;
+	border: 1px solid $bq-border-subtle;
+	border-radius: $bq-radius-pill;
+	background-color: $bq-surface-raised;
+	color: $bq-text-muted;
+	font-size: $bq-font-size-sm;
+	transition:
+		background-color $bq-duration-base $bq-easing-luxe,
+		border-color $bq-duration-base $bq-easing-luxe,
+		color $bq-duration-base $bq-easing-luxe;
+}
+
+.line {
+	width: clamp(24px, 7vw, 74px);
+	height: 1px;
+	background-color: $bq-border-subtle;
+	margin-inline: $bq-space-3;
+}
+
+.step.is-active {
+	color: $bq-accent-base;
+
+	.seal {
+		border-color: $bq-border-accent;
+		background-color: $bq-accent-strong;
+		color: $bq-text-on-accent;
+	}
+}
+
+.step.is-done {
+	color: $bq-text-secondary;
+
+	.seal {
+		border-color: $bq-border-accent;
+		background-color: $bq-accent-strong;
+		color: $bq-text-on-accent;
+	}
+
+	.line {
+		background-color: $bq-border-accent;
+	}
+}
+
+@include until("sm") {
+	.label {
+		@include visually-hidden;
+	}
+
+	.line {
+		margin-inline: $bq-space-2;
+	}
+}

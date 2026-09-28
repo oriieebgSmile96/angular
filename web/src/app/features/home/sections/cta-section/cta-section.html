@@ -1,0 +1,16 @@
+<div class="inner">
+	<p class="bq-eyebrow bq-eyebrow--bright" bqReveal>{{ cta.eyebrow | t }}</p>
+	<h2 class="bq-display-1 heading" bqReveal="rise" [bqRevealDelay]="60">
+		{{ cta.heading | t }}
+	</h2>
+	<p class="bq-lede" bqReveal [bqRevealDelay]="120">{{ cta.body | t }}</p>
+	<button
+		bqButton="primary"
+		size="lg"
+		type="button"
+		bqReveal="scale"
+		[bqRevealDelay]="200"
+		(click)="bookRequested.emit()">
+		{{ "hero.book" | t }}
+	</button>
+</div>

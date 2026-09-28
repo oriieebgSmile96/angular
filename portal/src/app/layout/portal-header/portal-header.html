@@ -1,0 +1,60 @@
+<div class="identity" bqReveal="fade">
+	<img class="logo" src="img/logo.png" alt="" width="64" height="64" />
+
+	<div class="wordmark">
+		<p class="portal">{{ "header.clientPortal" | t }}</p>
+		<!-- The atelier's own name, so it is set in Arabic for every visitor. -->
+		<p class="arabic" lang="ar" dir="rtl">{{ atelier.legalName.ar }}</p>
+		<p class="latin" lang="en" dir="ltr">{{ atelier.legalName.en }}</p>
+	</div>
+
+	<div class="actions">
+		<button
+			type="button"
+			class="bq-icon-button"
+			[attr.aria-label]="(isDark() ? 'theme.toLight' : 'theme.toDark') | t"
+			(click)="toggleTheme()">
+			<bq-icon [name]="isDark() ? 'sun' : 'moon'" [size]="18" />
+		</button>
+
+		<button
+			type="button"
+			class="bq-icon-button"
+			[attr.aria-label]="'language.switch' | t"
+			(click)="toggleLanguage()">
+			{{ nextLanguageLabel() }}
+		</button>
+	</div>
+</div>
+
+<div class="project">
+	<h1 class="name" bqReveal="rise" [bqRevealDelay]="80">
+		<span class="lead">{{ project.nameLead | t }}</span> {{ project.name | t }}
+	</h1>
+	<p class="meta" bqReveal [bqRevealDelay]="160">
+		{{ project.location | t }} &nbsp;·&nbsp;
+		{{ "header.contractRef" | t: { ref: project.contractRef } }}
+	</p>
+</div>
+
+<!-- The three cards arrive in sequence behind the project name, so the eye
+     lands on what the project is before what state it is in. -->
+<dl class="stats" [attr.aria-label]="'header.statsLabel' | t">
+	<div class="stat" bqReveal="scale" [bqRevealIndex]="0" [bqRevealDelay]="220">
+		<dt>{{ "header.projectStage" | t }}</dt>
+		<dd class="value">{{ project.phase | t }}</dd>
+		<dd class="detail">{{ project.phaseDetail | t }}</dd>
+	</div>
+
+	<div class="stat" bqReveal="scale" [bqRevealIndex]="1" [bqRevealDelay]="220">
+		<dt>{{ "header.timeline" | t }}</dt>
+		<dd class="value">{{ project.timelinePercent }}%</dd>
+		<dd class="detail">{{ project.timelineNote | t }}</dd>
+	</div>
+
+	<div class="stat" bqReveal="scale" [bqRevealIndex]="2" [bqRevealDelay]="220">
+		<dt>{{ "header.client" | t }}</dt>
+		<dd class="value">{{ project.clientName | t }}</dd>
+		<dd class="detail">{{ project.clientRole | t }}</dd>
+	</div>
+</dl>

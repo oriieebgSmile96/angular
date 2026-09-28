@@ -1,0 +1,16 @@
+<header class="head">
+	<p class="bq-eyebrow" bqReveal>{{ section.eyebrow | t }}</p>
+	<h2 class="bq-display-2" bqReveal="rise" [bqRevealDelay]="60">
+		{{ section.heading | t }}
+	</h2>
+</header>
+
+<!-- The steps arrive in the order the client will live through them. -->
+<ol class="steps" role="list">
+	@for (step of steps; track step.icon) {
+		<li class="step" bqReveal [bqRevealIndex]="$index" [bqRevealDelay]="120">
+			<span class="seal"><bq-icon [name]="step.icon" [size]="22" /></span>
+			<h3 class="step-title">{{ step.title | t }}</h3>
+		</li>
+	}
+</ol>

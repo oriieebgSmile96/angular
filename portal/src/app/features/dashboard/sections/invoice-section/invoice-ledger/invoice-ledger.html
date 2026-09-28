@@ -1,0 +1,43 @@
+<table class="lines">
+	<caption class="assistive">
+		{{
+			"invoice.linesLabel" | t
+		}}
+	</caption>
+	<thead>
+		<tr>
+			<th scope="col" class="bq-micro-label">{{ "invoice.description" | t }}</th>
+			<th scope="col" class="bq-micro-label">{{ "invoice.unit" | t }}</th>
+			<th scope="col" class="bq-micro-label numeric">{{ "invoice.rate" | t }}</th>
+			<th scope="col" class="bq-micro-label numeric">{{ "invoice.amount" | t }}</th>
+		</tr>
+	</thead>
+	<tbody>
+		@for (line of lines(); track line.id) {
+			<tr bqReveal="fade" [bqRevealIndex]="$index">
+				<th scope="row" class="description">{{ line.description | t }}</th>
+				<td>{{ line.unit | t }}</td>
+				<td class="numeric bq-numeric">{{ line.rate }}</td>
+				<td class="numeric bq-numeric amount">{{ line.amount }}</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+<!-- Closes the run of row hairlines, which the mixin draws on the leading edge. -->
+<hr class="ledger-rule" />
+
+<dl class="totals">
+	<div class="totals-row" bqReveal [bqRevealIndex]="0">
+		<dt>{{ "invoice.subtotal" | t }}</dt>
+		<dd class="bq-numeric">{{ subtotal() }}</dd>
+	</div>
+	<div class="totals-row" bqReveal [bqRevealIndex]="1">
+		<dt>{{ "invoice.vat" | t: { rate: vatPercent } }}</dt>
+		<dd class="bq-numeric">{{ vat() }}</dd>
+	</div>
+	<div class="totals-row totals-row--grand" bqReveal [bqRevealIndex]="2">
+		<dt>{{ "invoice.total" | t }}</dt>
+		<dd class="bq-numeric">{{ total() }}</dd>
+	</div>
+</dl>

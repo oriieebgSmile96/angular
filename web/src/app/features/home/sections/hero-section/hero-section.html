@@ -1,0 +1,31 @@
+<bq-photo class="backdrop" [src]="hero.photo.src" [alt]="hero.photo.alt | t" ratio="auto" [eager]="true" />
+<div class="scrim" aria-hidden="true"></div>
+
+<!-- The copy and figures sit on the photograph, which is dark in either theme,
+     so this band keeps the dark palette even when the page is on paper. -->
+<div class="content bq-theme-dark">
+	<p class="bq-eyebrow" bqReveal>{{ hero.eyebrow | t }}</p>
+	<h1 class="bq-display-1 headline" bqReveal="rise" [bqRevealDelay]="80">
+		{{ hero.heading | t }}
+	</h1>
+	<p class="bq-lede" bqReveal [bqRevealDelay]="160">{{ hero.body | t }}</p>
+
+	<div class="actions" bqReveal [bqRevealDelay]="240">
+		<button bqButton="primary" size="lg" type="button" (click)="bookRequested.emit()">
+			{{ "hero.book" | t }}
+		</button>
+		<button bqButton="ghost" size="lg" type="button" (click)="portfolioRequested.emit()">
+			{{ "hero.viewPortfolio" | t }}
+		</button>
+	</div>
+</div>
+
+<!-- The figures count in one after the other, behind the copy that frames them. -->
+<dl class="stats bq-theme-dark">
+	@for (stat of stats; track stat.value) {
+		<div class="stat" bqReveal="scale" [bqRevealIndex]="$index" [bqRevealDelay]="320">
+			<dt class="stat-value">{{ stat.value }}</dt>
+			<dd class="stat-label">{{ stat.label | t }}</dd>
+		</div>
+	}
+</dl>

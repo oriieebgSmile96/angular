@@ -1,0 +1,55 @@
+@use "styles/tokens" as *;
+@use "styles/mixins" as *;
+
+:host {
+	display: block;
+}
+
+.intro {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: $bq-space-2;
+	text-align: center;
+}
+
+.title {
+	@include display($bq-font-size-xl);
+
+	color: $bq-text-primary;
+	text-transform: uppercase;
+
+	@include from("sm") {
+		font-size: $bq-font-size-2xl;
+	}
+}
+
+.lede {
+	max-width: 52ch;
+	color: $bq-text-muted;
+	font-size: $bq-font-size-xs;
+	line-height: $bq-font-leading-relaxed;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: $bq-space-5;
+	margin-top: $bq-space-7;
+}
+
+.grid {
+	display: grid;
+	gap: $bq-space-4;
+	grid-template-columns: 1fr;
+
+	@include from("sm") {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+.span-2 {
+	@include from("sm") {
+		grid-column: 1 / -1;
+	}
+}

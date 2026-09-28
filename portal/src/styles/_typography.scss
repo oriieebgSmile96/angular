@@ -1,0 +1,42 @@
+@use "tokens" as *;
+@use "mixins" as *;
+
+/**
+ * The portal's shared type roles.
+ *
+ * Every section repeats the same three-part opening — a small-caps eyebrow, a
+ * heavy serif heading, and a grey lede — so those live here rather than being
+ * restated in four stylesheets.
+ */
+
+.bq-eyebrow {
+	@include eyebrow;
+}
+
+.bq-section-heading {
+	margin: 0;
+	color: $bq-text-primary;
+	font-family: $bq-font-family-display;
+	font-size: $bq-font-size-2xl;
+	font-weight: $bq-font-weight-extrabold;
+	line-height: $bq-font-leading-tight;
+}
+
+.bq-lede {
+	max-width: 62ch;
+	margin: 0;
+	color: $bq-text-muted;
+	font-family: $bq-font-family-body;
+	font-size: $bq-font-size-sm;
+	line-height: $bq-font-leading-normal;
+}
+
+.bq-micro-label {
+	@include micro-label;
+}
+
+/// Tabular figures, so columns of dirhams line up on the decimal.
+.bq-numeric {
+	font-family: $bq-font-family-body;
+	font-variant-numeric: tabular-nums;
+}

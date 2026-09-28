@@ -1,0 +1,61 @@
+@use "styles/tokens" as *;
+@use "styles/mixins" as *;
+
+:host {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: $bq-space-3;
+	padding-block: $bq-space-4;
+	text-align: center;
+}
+
+.seal {
+	display: grid;
+	width: 56px;
+	height: 56px;
+	place-items: center;
+	border-radius: $bq-radius-pill;
+	background: linear-gradient(150deg, $bq-accent-strong, $bq-accent-text);
+	box-shadow: $bq-shadow-gold;
+	color: $bq-text-on-accent;
+	animation: seal-in $bq-duration-slow $bq-easing-luxe both;
+}
+
+.title {
+	@include display($bq-font-size-xl);
+
+	color: $bq-text-primary;
+	text-transform: uppercase;
+
+	@include from("sm") {
+		font-size: $bq-font-size-2xl;
+	}
+}
+
+.lede {
+	max-width: 48ch;
+	color: $bq-text-muted;
+	font-size: $bq-font-size-xs;
+	line-height: $bq-font-leading-relaxed;
+}
+
+.actions {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: $bq-space-3;
+	margin-top: $bq-space-3;
+}
+
+@keyframes seal-in {
+	from {
+		opacity: 0;
+		transform: scale(0.7);
+	}
+
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}

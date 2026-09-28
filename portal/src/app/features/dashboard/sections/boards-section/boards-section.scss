@@ -1,0 +1,161 @@
+@use "styles/tokens" as *;
+@use "styles/mixins" as *;
+@use "styles/motion" as *;
+
+:host {
+	display: grid;
+	gap: $bq-space-7;
+}
+
+.intro {
+	display: grid;
+	gap: $bq-space-3;
+}
+
+// Figma sets four fixed cards on one row. They wrap rather than shrink, so the
+// swatch keeps the proportions of the physical sample at every width.
+.samples {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 42px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.card {
+	display: grid;
+	inline-size: 298px;
+	max-inline-size: 100%;
+	min-block-size: 311px;
+	// Clips the swatch to the panel's rim; its own radius would otherwise leave a
+	// hairline of card showing at the two top corners.
+	overflow: hidden;
+	grid-template-rows: auto 1fr auto;
+
+	@include panel;
+}
+
+.swatch {
+	display: flex;
+	block-size: 123px;
+	align-items: start;
+	justify-content: end;
+	padding: $bq-space-3;
+	border-start-start-radius: $bq-radius-panel;
+	border-start-end-radius: $bq-radius-panel;
+}
+
+// Gold over a colour that never re-tints, so the pill is fixed too: both the
+// accent and the text on it are the same in either theme.
+.pill {
+	padding: $bq-space-2 $bq-space-4;
+	border-radius: $bq-radius-pill;
+	background-color: color-mix(in srgb, $bq-accent-strong 82%, transparent);
+
+	@include micro-label($bq-text-on-accent);
+}
+
+.detail {
+	display: grid;
+	gap: $bq-space-2;
+	align-content: start;
+	padding: $bq-space-4;
+}
+
+.name {
+	margin: 0;
+	color: $bq-text-primary;
+	font-family: $bq-font-family-display;
+	font-size: $bq-font-size-sm;
+	font-weight: $bq-font-weight-extrabold;
+	line-height: $bq-font-leading-tight;
+}
+
+// Set apart from the product name it qualifies, so the heading still reads as
+// one line but the finish is legible as the distinguishing part.
+.finish {
+	color: $bq-accent-text;
+	font-family: $bq-font-family-label;
+	font-size: $bq-font-size-xs;
+	font-weight: $bq-font-weight-regular;
+}
+
+.specs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: $bq-space-2;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.spec {
+	@include chip;
+}
+
+// 266×48 inside a 298 card: inset by 16 on three sides, with the 1fr row above
+// absorbing whatever the specs leave over.
+.action {
+	display: flex;
+	block-size: $bq-space-9;
+	min-block-size: $bq-space-9;
+	align-items: center;
+	justify-content: center;
+	margin-block-end: $bq-space-4;
+	margin-inline: $bq-space-4;
+	padding-inline: $bq-space-4;
+	border-radius: $bq-radius-control;
+	font-size: $bq-font-size-xs;
+	text-align: center;
+}
+
+// The static counterpart to the gold button: same footprint, no affordance.
+.approved {
+	gap: $bq-space-2;
+	border: 1px solid color-mix(in srgb, $bq-accent-base 22%, transparent);
+	background-color: color-mix(in srgb, $bq-accent-base 4%, $bq-surface-raised);
+	color: $bq-accent-text;
+	font-family: $bq-font-family-display-sc;
+	font-weight: $bq-font-weight-bold;
+	letter-spacing: $bq-font-tracking-normal;
+	text-transform: uppercase;
+
+	@include focus-ring;
+}
+
+.announcement {
+	@include visually-hidden;
+}
+
+// ---------------------------------------------------------------------------
+// Arrival, and the moment of sign-off.
+// ---------------------------------------------------------------------------
+
+@include motion-safe {
+	// The colour is what the client is actually approving, so it settles in a
+	// beat behind the card that frames it.
+	.swatch {
+		transform: scale(1.06);
+		transition: transform $bq-duration-reveal $bq-easing-luxe 100ms;
+	}
+
+	.card.is-inview .swatch {
+		transform: none;
+	}
+
+	// Sign-off is the one consequential action on this page. The tick confirms it
+	// happened; the pill and bar behind it only report that it did, so they fade
+	// while the tick is what moves.
+	.action--just-approved {
+		animation: bq-fade-in $bq-duration-fast $bq-easing-standard backwards;
+
+		bq-icon {
+			animation: bq-check-pop $bq-duration-base $bq-easing-luxe 80ms backwards;
+		}
+	}
+
+	.card.is-inview .pill {
+		animation: bq-fade-in $bq-duration-base $bq-easing-standard 320ms backwards;
+	}
+}

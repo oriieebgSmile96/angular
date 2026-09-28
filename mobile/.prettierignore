@@ -1,0 +1,7 @@
+# Generated from shared/design-tokens/tokens.json
+src/theme/tokens.ts
+
+.expo
+.expo-export
+node_modules
+package-lock.json

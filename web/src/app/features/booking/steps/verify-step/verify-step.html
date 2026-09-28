@@ -1,0 +1,56 @@
+<header class="intro">
+	<p class="bq-eyebrow">{{ "booking.verify.eyebrow" | t }}</p>
+	<h2 id="bq-booking-title" class="title">{{ "booking.verify.title" | t }}</h2>
+	<p class="lede">{{ "booking.verify.lede" | t: { length: codeLength } }}</p>
+	<p class="mobile" dir="ltr">{{ maskedMobile() }}</p>
+	<button bqButton="link" type="button" (click)="editRequested.emit()">
+		{{ "booking.verify.editNumber" | t }}
+	</button>
+</header>
+
+<bq-otp-input
+	[(value)]="code"
+	[length]="codeLength"
+	[disabled]="pending()"
+	[invalid]="!!error()"
+	(completed)="submit()" />
+
+@if (error(); as messageKey) {
+	<p class="bq-error feedback" role="alert"><bq-icon name="close" [size]="14" />{{ messageKey | t }}</p>
+}
+
+<p class="meta">
+	@if (expired()) {
+		<span class="expired">{{ "booking.verify.expired" | t }}</span>
+	} @else {
+		<span>{{ "booking.verify.countdown" | t: { time: countdown() } }}</span>
+	}
+	<span>{{ "booking.verify.missing" | t }}</span>
+	<button bqButton="link" type="button" [disabled]="pending()" (click)="resendRequested.emit()">
+		{{ "booking.verify.resend" | t }}
+	</button>
+</p>
+
+@if (demoCode(); as code) {
+	<p class="demo" role="note">
+		<bq-icon name="sparkle" [size]="14" />
+		{{ "booking.verify.demo" | t }} <strong dir="ltr">{{ code }}</strong>
+	</p>
+}
+
+<button
+	bqButton="primary"
+	size="lg"
+	[block]="true"
+	type="button"
+	[disabled]="!complete() || pending() || expired()"
+	(click)="submit()">
+	{{ (pending() ? "booking.verify.submitPending" : "booking.verify.submit") | t }}
+</button>
+
+<p class="footnote">
+	{{ "booking.verify.wrongNumber" | t }}
+	<button bqButton="link" type="button" (click)="editRequested.emit()">
+		{{ "booking.verify.back" | t }}
+	</button>
+</p>

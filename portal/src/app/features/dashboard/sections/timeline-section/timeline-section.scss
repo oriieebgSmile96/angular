@@ -1,0 +1,200 @@
+@use "styles/tokens" as *;
+@use "styles/mixins" as *;
+@use "styles/motion" as *;
+
+:host {
+	display: grid;
+	gap: $bq-space-7;
+}
+
+.intro {
+	display: grid;
+	gap: $bq-space-3;
+}
+
+.stages {
+	display: grid;
+	margin: 0;
+	padding: $bq-space-8 $bq-space-6;
+	list-style: none;
+
+	@include panel;
+
+	@include from("md") {
+		padding: $bq-space-8;
+	}
+}
+
+.stage {
+	display: grid;
+	gap: $bq-space-3 $bq-space-5;
+	padding-block-end: $bq-space-8;
+	grid-template-areas:
+		"medallion detail date"
+		"medallion progress progress";
+	grid-template-columns: 50px minmax(0, 1fr) auto;
+	align-items: start;
+
+	// The connector runs from one medallion to the next, so the last stage has
+	// nothing to connect to and the run must not overhang the list.
+	&:not(:last-child) .medallion::after {
+		position: absolute;
+		inset-block-start: calc(100% + #{$bq-space-2});
+		block-size: calc(100% + #{$bq-space-9});
+		inline-size: 1px;
+		background: linear-gradient(to bottom, $bq-accent-text, transparent);
+		content: "";
+	}
+
+	&:last-child {
+		padding-block-end: 0;
+	}
+}
+
+.medallion {
+	position: relative;
+	display: grid;
+	grid-area: medallion;
+	place-items: center;
+	inline-size: 50px;
+	block-size: 50px;
+	border: 2px solid $bq-border-strong;
+	border-radius: $bq-radius-pill;
+	color: $bq-text-faint;
+	font-family: $bq-font-family-body;
+	font-size: $bq-font-size-xs;
+	font-weight: $bq-font-weight-medium;
+}
+
+.stage--completed .medallion {
+	border-color: $bq-accent-strong;
+	background-color: $bq-accent-strong;
+	color: $bq-text-on-accent;
+}
+
+.stage--in-progress .medallion {
+	border-color: $bq-accent-base;
+	background-color: $bq-surface-sunken;
+	color: $bq-accent-text;
+}
+
+.detail {
+	display: grid;
+	gap: $bq-space-1;
+	grid-area: detail;
+}
+
+.status {
+	display: flex;
+	gap: $bq-space-1;
+	align-items: center;
+	margin: 0;
+	color: $bq-accent-base;
+	font-family: $bq-font-family-display-sc;
+	font-size: $bq-font-size-2xs;
+	font-weight: $bq-font-weight-bold;
+	letter-spacing: $bq-font-tracking-micro;
+	text-transform: uppercase;
+}
+
+.title {
+	margin: 0;
+	color: $bq-text-primary;
+	font-family: $bq-font-family-display;
+	font-size: $bq-font-size-sm;
+	font-weight: $bq-font-weight-extrabold;
+	line-height: $bq-font-leading-tight;
+}
+
+.summary {
+	margin: 0;
+	color: $bq-text-muted;
+	font-family: $bq-font-family-body;
+	font-size: $bq-font-size-sm;
+}
+
+// An upcoming stage is stated, not announced: the whole row steps back to muted.
+.stage--upcoming {
+	.status,
+	.title {
+		color: $bq-text-muted;
+	}
+}
+
+.date {
+	grid-area: date;
+	margin: 0;
+	color: $bq-text-muted;
+	font-size: $bq-font-size-2xs;
+	white-space: nowrap;
+}
+
+.progress {
+	display: grid;
+	gap: $bq-space-2;
+	grid-area: progress;
+	grid-template-columns: 1fr auto;
+	margin-block-start: $bq-space-3;
+}
+
+.percent {
+	text-align: end;
+}
+
+.track {
+	grid-column: 1 / -1;
+	block-size: 2px;
+	background-color: $bq-border-strong;
+}
+
+.fill {
+	display: block;
+	block-size: 100%;
+	inline-size: var(--bq-fill, 0%);
+	background-color: $bq-accent-base;
+}
+
+// ---------------------------------------------------------------------------
+// Arrival.
+// ---------------------------------------------------------------------------
+
+@include motion-safe {
+	// The bar runs out to its figure once the row has settled, so the number and
+	// the length arrive together rather than the length being a fait accompli.
+	.fill {
+		inline-size: 0;
+		transition: inline-size $bq-duration-reveal $bq-easing-luxe 240ms;
+	}
+
+	.stage.is-inview .fill {
+		inline-size: var(--bq-fill, 0%);
+	}
+
+	// The tick lands after its medallion has, which is what makes it read as the
+	// stage being marked off rather than as part of the furniture.
+	.stage--completed.is-inview .medallion bq-icon {
+		animation: bq-check-pop $bq-duration-base $bq-easing-luxe 200ms backwards;
+	}
+
+	// The section promises live tracking, and exactly one stage is live. The dot
+	// beside its status is the only thing on the page that keeps moving; slow and
+	// shallow, so it reads as a heartbeat rather than as something demanding a
+	// click.
+	.stage--in-progress .status bq-icon {
+		animation: bq-pulse 2.4s $bq-easing-standard infinite;
+	}
+}
+
+@include until("md") {
+	.stage {
+		grid-template-areas:
+			"medallion detail"
+			"medallion date"
+			"progress progress";
+		grid-template-columns: 50px minmax(0, 1fr);
+	}
+
+	.date {
+		white-space: normal;
+	}
+}

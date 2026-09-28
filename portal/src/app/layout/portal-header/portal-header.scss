@@ -1,0 +1,134 @@
+@use "styles/tokens" as *;
+@use "styles/mixins" as *;
+
+:host {
+	display: block;
+	padding-block-end: $bq-space-6;
+	border-block-end: 1px solid color-mix(in srgb, $bq-accent-text 40%, transparent);
+}
+
+.identity {
+	display: flex;
+	gap: $bq-space-4;
+	align-items: center;
+}
+
+.logo {
+	width: 64px;
+	height: 64px;
+	flex: none;
+	border-radius: $bq-radius-sm;
+	object-fit: cover;
+}
+
+.wordmark {
+	display: grid;
+	gap: 2px;
+}
+
+.portal {
+	margin: 0;
+	color: $bq-accent-text;
+	font-family: $bq-font-family-display;
+	font-size: $bq-font-size-xs;
+	font-weight: $bq-font-weight-medium;
+	letter-spacing: $bq-font-tracking-micro;
+	text-transform: uppercase;
+}
+
+.arabic {
+	margin: 0;
+	color: $bq-text-primary;
+	font-family: $bq-font-family-display;
+	font-size: $bq-font-size-xs;
+	font-weight: $bq-font-weight-medium;
+}
+
+.latin {
+	margin: 0;
+	color: $bq-accent-text;
+	font-family: $bq-font-family-label;
+	font-size: $bq-font-size-xs;
+}
+
+.actions {
+	display: flex;
+	gap: $bq-space-2;
+	// Sits at the far end of the row in either direction.
+	margin-inline-start: auto;
+}
+
+.project {
+	margin-block-start: $bq-space-6;
+	display: grid;
+	gap: $bq-space-2;
+}
+
+.name {
+	margin: 0;
+	color: $bq-accent-base;
+	font-family: $bq-font-family-display;
+	font-size: $bq-font-size-2xl;
+	font-weight: $bq-font-weight-medium;
+	line-height: $bq-font-leading-tight;
+}
+
+// Figma sets the first word in white against the gold of the rest.
+.lead {
+	color: $bq-text-primary;
+	font-weight: $bq-font-weight-extrabold;
+}
+
+.meta {
+	margin: 0;
+	color: $bq-accent-text;
+	font-family: $bq-font-family-label;
+	font-size: $bq-font-size-sm;
+}
+
+.stats {
+	display: grid;
+	gap: $bq-space-5;
+	margin: $bq-space-7 0 0;
+	grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+
+	@include from("lg") {
+		// Three fixed cards pinned to the trailing edge, as drawn.
+		margin-inline-start: auto;
+		grid-template-columns: repeat(3, 180px);
+	}
+}
+
+.stat {
+	display: grid;
+	gap: $bq-space-1;
+	min-height: 100px;
+	padding: $bq-space-4;
+	align-content: center;
+
+	@include panel;
+
+	dt {
+		@include micro-label;
+		text-align: end;
+	}
+
+	dd {
+		margin: 0;
+		text-align: end;
+	}
+}
+
+.value {
+	color: $bq-text-primary;
+	font-family: $bq-font-family-display;
+	font-size: $bq-font-size-xs;
+	font-weight: $bq-font-weight-black;
+}
+
+.detail {
+	color: $bq-text-muted;
+	font-family: $bq-font-family-display;
+	font-size: $bq-font-size-xs;
+	font-weight: $bq-font-weight-medium;
+}

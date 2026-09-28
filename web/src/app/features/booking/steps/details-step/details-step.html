@@ -1,0 +1,60 @@
+<header class="intro">
+	<p class="bq-eyebrow">{{ "booking.details.eyebrow" | t }}</p>
+	<h2 id="bq-booking-title" class="title">{{ "booking.details.title" | t }}</h2>
+	<p class="lede">{{ "booking.details.lede" | t }}</p>
+</header>
+
+<form class="form" [formGroup]="form()" (ngSubmit)="onSubmit()" novalidate>
+	<bq-radio-group
+		[label]="'booking.details.format' | t"
+		formControlName="format"
+		layout="cards"
+		[options]="formats" />
+
+	<div class="grid">
+		<bq-input
+			[label]="'booking.details.fullName' | t"
+			formControlName="fullName"
+			[placeholder]="'booking.details.fullNamePlaceholder' | t"
+			autocomplete="name" />
+
+		<bq-input
+			[label]="'booking.details.email' | t"
+			formControlName="email"
+			contentType="email"
+			[placeholder]="'booking.details.emailPlaceholder' | t"
+			autocomplete="email" />
+
+		<bq-input
+			class="span-2"
+			[label]="'booking.details.mobile' | t"
+			formControlName="mobile"
+			contentType="tel"
+			[placeholder]="'booking.details.mobilePlaceholder' | t"
+			autocomplete="tel"
+			[hint]="'booking.details.mobileHint' | t" />
+
+		<bq-select [label]="'booking.details.projectType' | t" formControlName="projectType" [options]="projectTypes" />
+
+		<bq-date-range-picker
+			class="span-2"
+			[label]="'booking.details.preferredDate' | t"
+			formControlName="preferredDateRange"
+			[minDate]="earliestDate"
+			[businessDaysOnly]="true"
+			[hint]="'booking.details.preferredDateHint' | t" />
+
+		<bq-select
+			class="span-2"
+			[label]="'booking.details.preferredTime' | t"
+			formControlName="preferredTime"
+			[placeholder]="'booking.details.preferredTimePlaceholder' | t"
+			[options]="timeSlots" />
+	</div>
+
+	<bq-checkbox formControlName="consent" [label]="'booking.details.consent' | t" />
+
+	<button bqButton="primary" size="lg" [block]="true" type="submit" [disabled]="pending()">
+		{{ (pending() ? "booking.details.submitPending" : "booking.details.submit") | t }}
+	</button>
+</form>

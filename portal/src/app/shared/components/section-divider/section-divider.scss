@@ -1,0 +1,74 @@
+@use "styles/tokens" as *;
+@use "styles/motion" as *;
+
+:host {
+	display: flex;
+	gap: $bq-space-4;
+	align-items: center;
+	justify-content: center;
+	height: 6px;
+	// The ornament is mirror-symmetric, but flex order and gradient direction are
+	// not: in RTL the two rules would swap sides while their gradients stayed put,
+	// pointing the gold outward. Pinning the direction costs nothing here and keeps
+	// both sides deterministic.
+	direction: ltr;
+}
+
+:host::before,
+:host::after {
+	flex: 1;
+	height: 1px;
+	content: "";
+}
+
+// Both rules fade out towards the page edge and meet the bead at full gold.
+:host::before {
+	background: linear-gradient(to right, transparent, $bq-accent-text);
+}
+
+:host::after {
+	background: linear-gradient(to left, transparent, $bq-accent-text);
+}
+
+.bead {
+	width: 6px;
+	height: 6px;
+	flex: none;
+	border-radius: $bq-radius-pill;
+	background-color: $bq-accent-base;
+}
+
+// The divider's own arrival: the bead lands, then the two rules run out from
+// under it. The host fades in as a whole via the reveal directive, so these only
+// have to describe the drawing.
+@include motion-safe {
+	:host::before,
+	:host::after {
+		transform: scaleX(0);
+		transition: transform $bq-duration-slow $bq-easing-luxe 120ms;
+	}
+
+	:host::before {
+		transform-origin: right center;
+	}
+
+	:host::after {
+		transform-origin: left center;
+	}
+
+	.bead {
+		transform: scale(0);
+		transition: transform $bq-duration-base $bq-easing-luxe;
+	}
+
+	:host(.is-inview) {
+		&::before,
+		&::after {
+			transform: scaleX(1);
+		}
+
+		.bead {
+			transform: scale(1);
+		}
+	}
+}

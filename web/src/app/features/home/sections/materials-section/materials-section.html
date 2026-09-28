@@ -1,0 +1,36 @@
+<div class="inner">
+	<div class="copy">
+		<p class="bq-eyebrow" bqReveal>{{ materials.eyebrow | t }}</p>
+		<h2 class="bq-display-2" bqReveal="rise" [bqRevealDelay]="60">
+			{{ materials.heading | t }}
+		</h2>
+		<p class="bq-lede" bqReveal [bqRevealDelay]="120">{{ materials.body | t }}</p>
+
+		<!-- The list ticks itself off one line at a time. -->
+		<ul class="highlights" role="list">
+			@for (highlight of highlights; track highlight.en) {
+				<li bqReveal [bqRevealIndex]="$index" [bqRevealDelay]="180">
+					<bq-icon name="check" [size]="16" [strokeWidth]="2" />{{ highlight | t }}
+				</li>
+			}
+		</ul>
+
+		<button
+			bqButton="ghost"
+			size="lg"
+			type="button"
+			bqReveal
+			[bqRevealDelay]="320"
+			(click)="consultationRequested.emit()">
+			{{ "materials.explore" | t }}
+		</button>
+	</div>
+
+	<bq-photo
+		class="visual"
+		bqReveal="scale"
+		[bqRevealDelay]="120"
+		[src]="materials.photo.src"
+		[alt]="materials.photo.alt | t"
+		ratio="526 / 469" />
+</div>

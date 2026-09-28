@@ -1,0 +1,95 @@
+<header class="intro">
+	<p class="bq-eyebrow" bqReveal>{{ "invoice.eyebrow" | t }}</p>
+	<h2 class="bq-section-heading" bqReveal="rise" [bqRevealDelay]="60">
+		{{ "invoice.heading" | t }}
+	</h2>
+	<p class="bq-lede" bqReveal [bqRevealDelay]="120">
+		{{ "invoice.lede" | t: { project: project.name | t, location: project.location | t } }}
+	</p>
+</header>
+
+<article class="card" bqReveal="fade" [bqRevealDelay]="120">
+	<div class="band">
+		<div class="issue" bqReveal [bqRevealDelay]="200">
+			<span class="glyph" aria-hidden="true">
+				<bq-icon name="receipt" [size]="22" />
+			</span>
+
+			<div class="issue-detail">
+				<p class="bq-micro-label">{{ "invoice.number" | t }}</p>
+				<!-- A contract reference reads left to right in either script. -->
+				<p class="number" dir="ltr">{{ invoice.number }}</p>
+
+				<p class="dates bq-numeric">
+					<span>{{ issuedOn() }}</span>
+					<span>
+						<span class="due-label">{{ "invoice.due" | t }}</span>
+						<span class="due-date">{{ dueOn() }}</span>
+					</span>
+				</p>
+			</div>
+		</div>
+
+		<div class="headline" bqReveal [bqRevealDelay]="260">
+			<p class="bq-micro-label">{{ "invoice.total" | t }}</p>
+			<p class="figure">{{ total() }}</p>
+			<!-- Live region: the only place the confirmation is reported to a reader who cannot see the chip re-tint. -->
+			<p class="pill" role="status" [class.pill--confirmed]="paymentConfirmed()">
+				@if (paymentConfirmed()) {
+					<bq-icon name="check" [size]="12" [strokeWidth]="2" />
+				}
+				{{ statusLabel() | t }}
+			</p>
+		</div>
+	</div>
+
+	<div class="body">
+		<bq-invoice-ledger />
+
+		<bq-section-divider />
+
+		<div class="footer">
+			<bq-invoice-schedule />
+
+			<section class="method">
+				<h3 class="bq-micro-label">{{ "invoice.method" | t }}</h3>
+
+				<dl class="method-list">
+					<div class="method-row" bqReveal [bqRevealIndex]="0">
+						<dt class="bq-micro-label">{{ "invoice.bankTransfer" | t }}</dt>
+						<dd>
+							{{ payment.bank | t }}
+							<span class="iban" dir="ltr">{{ payment.iban }}</span>
+						</dd>
+					</div>
+					<div class="method-row" bqReveal [bqRevealIndex]="1">
+						<dt class="bq-micro-label">{{ "invoice.company" | t }}</dt>
+						<dd>{{ payment.company | t }}</dd>
+					</div>
+					<div class="method-row" bqReveal [bqRevealIndex]="2">
+						<dt class="bq-micro-label">{{ "invoice.reference" | t }}</dt>
+						<dd dir="ltr">{{ payment.reference }}</dd>
+					</div>
+				</dl>
+
+				<div class="actions" bqReveal [bqRevealDelay]="240">
+					<button
+						type="button"
+						class="bq-button bq-button--primary confirm"
+						[attr.aria-disabled]="paymentConfirmed()"
+						(click)="confirmPayment()">
+						@if (paymentConfirmed()) {
+							<bq-icon name="check" [size]="18" [strokeWidth]="2" />
+						}
+						{{ confirmLabel() | t }}
+					</button>
+
+					<button type="button" class="bq-button bq-button--ghost" (click)="downloadPdf()">
+						<bq-icon name="download" [size]="18" />
+						{{ "invoice.downloadPdf" | t }}
+					</button>
+				</div>
+			</section>
+		</div>
+	</div>
+</article>

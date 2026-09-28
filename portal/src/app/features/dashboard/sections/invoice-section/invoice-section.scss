@@ -1,0 +1,247 @@
+@use "styles/tokens" as *;
+@use "styles/mixins" as *;
+@use "styles/motion" as *;
+
+:host {
+	display: grid;
+	gap: $bq-space-7;
+}
+
+// ---------------------------------------------------------------------------
+// Arrival, and the moment of payment.
+// ---------------------------------------------------------------------------
+
+@include motion-safe {
+	// The one figure the client came for. It arrives a touch heavier than the
+	// rest of the band, then settles.
+	.card.is-inview .figure {
+		animation: bq-check-pop $bq-duration-slow $bq-easing-luxe 280ms backwards;
+	}
+
+	// A sheen crosses the gold tile once, as the invoice lands.
+	.glyph {
+		position: relative;
+		overflow: hidden;
+
+		// A specular highlight, not a themed surface: the tile it crosses is a
+		// fixed gold gradient in both palettes, so the glint is white in both.
+		&::after {
+			position: absolute;
+			inset-block: 0;
+			inset-inline-start: 0;
+			inline-size: 40%;
+			background: linear-gradient(
+				100deg,
+				transparent,
+				color-mix(in srgb, $bq-color-pure-white 55%, transparent),
+				transparent
+			);
+			content: "";
+		}
+	}
+
+	.card.is-inview .glyph::after {
+		animation: bq-sheen $bq-duration-reveal $bq-easing-standard 420ms backwards;
+	}
+
+	// Confirming payment is the other consequential action on this page, so it
+	// gets the same tick as a board sign-off.
+	.confirm bq-icon {
+		animation: bq-check-pop $bq-duration-base $bq-easing-luxe backwards;
+	}
+
+	.pill--confirmed bq-icon {
+		animation: bq-check-pop $bq-duration-base $bq-easing-luxe backwards;
+	}
+}
+
+.intro {
+	display: grid;
+	gap: $bq-space-3;
+}
+
+.assistive {
+	@include visually-hidden;
+}
+
+.card {
+	display: grid;
+
+	@include panel;
+}
+
+// --- Header band ------------------------------------------------------------
+
+.band {
+	display: flex;
+	flex-wrap: wrap;
+	gap: $bq-space-6;
+	align-items: center;
+	justify-content: space-between;
+	min-block-size: 153px;
+	padding: $bq-space-6;
+	// The band sits inside the card's 1px rim, so its corners run that much tighter.
+	border-start-start-radius: calc(#{$bq-radius-panel} - 1px);
+	border-start-end-radius: calc(#{$bq-radius-panel} - 1px);
+	background-color: color-mix(in srgb, $bq-accent-base 5%, transparent);
+
+	@include from("md") {
+		padding: $bq-space-6 $bq-space-8;
+	}
+}
+
+.issue {
+	display: flex;
+	gap: $bq-space-4;
+	align-items: flex-start;
+}
+
+.glyph {
+	display: grid;
+	inline-size: 40px;
+	block-size: 40px;
+	flex: none;
+	place-items: center;
+	border-radius: $bq-radius-sm;
+	background: $bq-accent-sheen;
+	color: $bq-text-on-accent;
+}
+
+.issue-detail {
+	display: grid;
+	gap: $bq-space-1;
+}
+
+.number {
+	color: $bq-text-primary;
+	font-family: $bq-font-family-display;
+	font-size: $bq-font-size-md;
+	font-weight: $bq-font-weight-bold;
+	letter-spacing: $bq-font-tracking-micro;
+}
+
+.dates {
+	display: flex;
+	flex-wrap: wrap;
+	gap: $bq-space-1 $bq-space-6;
+	margin-block-start: $bq-space-2;
+	color: $bq-text-muted;
+	font-size: $bq-font-size-2xs;
+}
+
+.due-label {
+	color: $bq-accent-text;
+}
+
+.due-date {
+	margin-inline-start: $bq-space-1;
+	color: $bq-accent-base;
+}
+
+.headline {
+	display: grid;
+	gap: $bq-space-2;
+	justify-items: end;
+	// Pins the total to the trailing edge once the band wraps on a narrow screen.
+	margin-inline-start: auto;
+	text-align: end;
+}
+
+.figure {
+	color: $bq-text-primary;
+	font-family: $bq-font-family-display;
+	font-size: $bq-font-size-2xl;
+	font-weight: $bq-font-weight-extrabold;
+	font-variant-numeric: tabular-nums;
+	line-height: $bq-font-leading-tight;
+}
+
+.pill {
+	@include chip;
+}
+
+.pill--confirmed {
+	border-color: color-mix(in srgb, $bq-state-success 45%, transparent);
+	background-color: color-mix(in srgb, $bq-state-success 14%, transparent);
+	color: $bq-state-success;
+}
+
+// --- Card body --------------------------------------------------------------
+
+.body {
+	display: grid;
+	gap: $bq-space-8;
+	padding: $bq-space-7 $bq-space-6;
+
+	// Carries the hairline under the header band.
+	@include gold-rule;
+
+	@include from("md") {
+		padding: $bq-space-8;
+	}
+}
+
+// --- Schedule and payment method --------------------------------------------
+
+.footer {
+	display: grid;
+	gap: $bq-space-8;
+
+	@include from("lg") {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+.method {
+	display: grid;
+	gap: $bq-space-4;
+	align-content: start;
+}
+
+.method-list {
+	display: grid;
+	gap: $bq-space-3;
+}
+
+.method-row {
+	display: grid;
+	gap: $bq-space-1;
+
+	dd {
+		color: $bq-text-primary;
+		font-family: $bq-font-family-body;
+		font-size: $bq-font-size-xs;
+	}
+}
+
+.iban {
+	display: block;
+	color: $bq-text-muted;
+}
+
+.actions {
+	display: grid;
+	gap: $bq-space-3;
+	margin-block-start: $bq-space-2;
+}
+
+// Confirmed is a state, not a dead control: it keeps its focus and its name so
+// the keyboard user who pressed it is not stranded on an element that vanished
+// from the tab order.
+.confirm[aria-disabled="true"] {
+	cursor: default;
+}
+
+// The download control hands the page to the browser's print pipeline, so the
+// card has to survive on paper: no interactive chrome, no tinted fills.
+@media print {
+	.actions {
+		display: none;
+	}
+
+	.card,
+	.band {
+		border-color: $bq-border-subtle;
+		background: none;
+	}
+}

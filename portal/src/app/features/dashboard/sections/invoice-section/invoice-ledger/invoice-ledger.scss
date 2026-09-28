@@ -1,0 +1,105 @@
+@use "styles/tokens" as *;
+@use "styles/mixins" as *;
+
+:host {
+	display: block;
+}
+
+.assistive {
+	@include visually-hidden;
+}
+
+.lines {
+	inline-size: 100%;
+	border-collapse: collapse;
+}
+
+// The invoice table is the only one in this view, so the cells are styled by
+// element rather than by a class on every one of twenty-eight of them.
+th,
+td {
+	text-align: start;
+	vertical-align: top;
+}
+
+thead th {
+	padding-block-end: $bq-space-3;
+}
+
+// The mixin rules the leading edge, so each hairline reads as the foot of the
+// row above it; `.ledger-rule` closes the run under the last line item.
+tbody tr {
+	@include gold-rule;
+}
+
+tbody :is(th, td) {
+	padding-block: $bq-space-4;
+	color: $bq-text-secondary;
+	font-family: $bq-font-family-body;
+	font-size: $bq-font-size-xs;
+	font-weight: $bq-font-weight-regular;
+}
+
+.numeric {
+	text-align: end;
+	white-space: nowrap;
+}
+
+.description {
+	inline-size: 46%;
+	padding-inline-end: $bq-space-5;
+	color: $bq-text-primary;
+}
+
+.amount {
+	color: $bq-accent-text;
+	font-weight: $bq-font-weight-semibold;
+}
+
+.ledger-rule {
+	margin: 0;
+
+	@include gold-rule;
+}
+
+.totals {
+	inline-size: 230px;
+	margin-inline-start: auto;
+	padding-block-start: $bq-space-5;
+}
+
+.totals-row {
+	display: flex;
+	gap: $bq-space-4;
+	align-items: baseline;
+	justify-content: space-between;
+	padding-block: $bq-space-2;
+
+	dt {
+		color: $bq-text-muted;
+		font-family: $bq-font-family-body;
+		font-size: $bq-font-size-2xs;
+	}
+
+	dd {
+		color: $bq-text-secondary;
+		font-size: $bq-font-size-xs;
+	}
+}
+
+.totals-row--grand {
+	margin-block-start: $bq-space-2;
+	padding-block-start: $bq-space-4;
+
+	@include gold-rule;
+
+	dt,
+	dd {
+		color: $bq-accent-text;
+		font-weight: $bq-font-weight-bold;
+	}
+
+	dd {
+		font-size: $bq-font-size-sm;
+	}
+}

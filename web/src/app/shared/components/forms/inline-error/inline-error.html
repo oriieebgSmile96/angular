@@ -1,0 +1,5 @@
+@if (message()) {
+	<p class="bq-inline-error__text" role="alert" [attr.id]="errorId()">
+		<bq-icon name="close" [size]="14" [strokeWidth]="2" />{{ message() }}
+	</p>
+}

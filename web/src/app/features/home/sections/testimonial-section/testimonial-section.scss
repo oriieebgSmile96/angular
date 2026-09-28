@@ -1,0 +1,74 @@
+@use "styles/tokens" as *;
+@use "styles/mixins" as *;
+
+:host {
+	@include section-padding;
+
+	display: block;
+	background-color: $bq-surface-sunken;
+}
+
+.inner {
+	@include container;
+
+	display: flex;
+	max-width: 900px;
+	flex-direction: column;
+	align-items: center;
+	gap: $bq-space-6;
+	text-align: center;
+}
+
+.heading {
+	color: $bq-text-primary;
+}
+
+.quote {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: $bq-space-5;
+	margin: 0;
+}
+
+.mark {
+	color: $bq-accent-base;
+}
+
+blockquote {
+	margin: 0;
+	color: $bq-text-muted;
+	font-family: $bq-font-family-display;
+	font-size: $bq-font-size-sm;
+	letter-spacing: $bq-font-tracking-title;
+	line-height: $bq-font-leading-normal;
+
+	@include from("md") {
+		font-size: $bq-font-size-lg;
+	}
+}
+
+figcaption {
+	color: $bq-accent-base;
+	font-family: $bq-font-family-display;
+	font-size: $bq-font-size-md;
+	font-weight: $bq-font-weight-bold;
+}
+
+.dots {
+	display: flex;
+	gap: $bq-space-2;
+}
+
+.dot {
+	width: 28px;
+	height: 2px;
+	background-color: color-mix(in srgb, $bq-text-primary 24%, transparent);
+	transition: background-color $bq-duration-fast $bq-easing-standard;
+
+	@include focus-ring;
+
+	&.is-active {
+		background-color: $bq-accent-base;
+	}
+}

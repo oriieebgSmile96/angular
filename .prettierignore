@@ -1,0 +1,21 @@
+node_modules/
+web/.angular/
+web/dist/
+portal/.angular/
+portal/dist/
+mobile/.expo/
+mobile/dist/
+
+# Generated — formatting these would fail the matching `:check` script.
+web/src/styles/_tokens.scss
+web/src/styles/_fonts.scss
+web/src/app/shared/components/icon/icon-name.ts
+web/public/icons/sprite.svg
+portal/src/styles/_tokens.scss
+portal/src/app/shared/components/icon/icon-name.ts
+portal/public/icons/sprite.svg
+mobile/src/theme/tokens.ts
+
+# Mirrored byte-for-byte from web/ by the font script; formatting one copy would
+# only make the two drift.
+portal/src/styles/_fonts.scss

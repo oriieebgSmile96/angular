@@ -1,0 +1,84 @@
+@use "tokens" as *;
+@use "mixins" as *;
+
+/**
+ * Portal buttons.
+ *
+ * Only two exist in the dashboard: a solid gold commitment ("Confirm payment
+ * sent", "Approve material") and a ghost alternative beside it ("Download PDF
+ * invoice"). Both are Playfair small-caps, per the Figma file.
+ */
+.bq-button {
+	display: inline-flex;
+	gap: $bq-space-2;
+	align-items: center;
+	justify-content: center;
+	min-height: 50px;
+	padding-inline: $bq-space-6;
+	border: 1px solid transparent;
+	border-radius: $bq-radius-control;
+	cursor: pointer;
+	transition:
+		background-color $bq-duration-fast $bq-easing-standard,
+		border-color $bq-duration-fast $bq-easing-standard,
+		color $bq-duration-fast $bq-easing-standard;
+
+	@include label-face($bq-font-size-sm, $bq-font-weight-bold);
+	@include focus-ring;
+
+	font-family: $bq-font-family-display-sc;
+	letter-spacing: $bq-font-tracking-normal;
+
+	&:disabled {
+		cursor: not-allowed;
+		opacity: 0.5;
+	}
+}
+
+.bq-button--primary {
+	border-color: $bq-accent-strong;
+	background-color: $bq-accent-strong;
+	color: $bq-text-on-accent;
+
+	&:hover:not(:disabled) {
+		border-color: $bq-accent-strong-hover;
+		background-color: $bq-accent-strong-hover;
+	}
+}
+
+.bq-button--ghost {
+	border-color: color-mix(in srgb, $bq-accent-base 22%, transparent);
+	background-color: color-mix(in srgb, $bq-accent-base 4%, $bq-surface-raised);
+	color: $bq-accent-text;
+
+	&:hover:not(:disabled) {
+		border-color: $bq-accent-base;
+		background-color: color-mix(in srgb, $bq-accent-base 10%, $bq-surface-raised);
+	}
+}
+
+/// Icon-only control in the header — theme and language switches.
+.bq-icon-button {
+	display: inline-flex;
+	gap: $bq-space-1;
+	align-items: center;
+	justify-content: center;
+	min-width: 38px;
+	height: 38px;
+	padding-inline: $bq-space-2;
+	border: 1px solid color-mix(in srgb, $bq-accent-base 22%, transparent);
+	border-radius: $bq-radius-md;
+	background-color: transparent;
+	color: $bq-text-secondary;
+	cursor: pointer;
+	transition:
+		border-color $bq-duration-fast $bq-easing-standard,
+		color $bq-duration-fast $bq-easing-standard;
+
+	@include focus-ring;
+
+	&:hover {
+		border-color: $bq-accent-base;
+		color: $bq-accent-text;
+	}
+}

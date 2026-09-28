@@ -1,0 +1,41 @@
+<p class="bq-eyebrow">{{ "booking.summary.eyebrow" | t }}</p>
+
+<dl class="rows">
+	<div class="row is-reference">
+		<dt>{{ "booking.summary.reference" | t }}</dt>
+		<dd dir="ltr">{{ booking().reference }}</dd>
+	</div>
+	<div class="row">
+		<dt>{{ "booking.summary.type" | t }}</dt>
+		<dd>{{ booking().formatLabel | t }}</dd>
+	</div>
+	<div class="row">
+		<dt>{{ "booking.summary.when" | t }}</dt>
+		<dd>{{ scheduledAt() }}</dd>
+	</div>
+	<div class="row">
+		<dt>{{ "booking.summary.name" | t }}</dt>
+		<dd>{{ booking().fullName }}</dd>
+	</div>
+	<div class="row">
+		<dt>{{ "booking.summary.email" | t }}</dt>
+		<dd dir="ltr">{{ booking().email }}</dd>
+	</div>
+	<div class="row">
+		<dt>{{ "booking.summary.mobile" | t }}</dt>
+		<dd dir="ltr">{{ booking().mobile }}</dd>
+	</div>
+	<div class="row">
+		<dt>{{ "booking.summary.project" | t }}</dt>
+		<dd>{{ booking().projectTypeLabel | t }}</dd>
+	</div>
+</dl>
+
+<div class="actions">
+	<button bqButton="primary" type="button" (click)="portfolioRequested.emit()">
+		{{ "booking.summary.portfolio" | t }}
+	</button>
+	<button bqButton="outline" type="button" (click)="calendarRequested.emit()">
+		{{ "booking.summary.calendar" | t }}
+	</button>
+</div>

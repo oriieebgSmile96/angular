@@ -1,0 +1,402 @@
+// GENERATED FROM shared/design-tokens/tokens.json - DO NOT EDIT BY HAND.
+
+// ---------------------------------------------------------------------------
+// SCSS variables - available at compile time (usable in media queries, maths).
+// ---------------------------------------------------------------------------
+
+// color
+$bq-color-gold-50: #FBF6EA;
+$bq-color-gold-100: #F7EDD6;
+$bq-color-gold-200: #F2E0B4;
+$bq-color-gold-300: #E8C97A;
+$bq-color-gold-400: #D6B25F;
+$bq-color-gold-500: #B08C37;
+$bq-color-gold-600: #8A6B2A;
+$bq-color-gold-700: #6B531F;
+$bq-color-gold-800: #4A3915;
+$bq-color-gold-900: #2B210C;
+$bq-color-ink-50: #F1F1F1;
+$bq-color-ink-100: #F6F6F6;
+$bq-color-ink-200: #C9C2B8;
+$bq-color-ink-300: #A09488;
+$bq-color-ink-400: #979797;
+$bq-color-ink-500: #676767;
+$bq-color-ink-600: #404040;
+$bq-color-ink-700: #333333;
+$bq-color-ink-800: #1C1C1C;
+$bq-color-ink-900: #0A0A0C;
+$bq-color-ivory-50: #FFFFFF;
+$bq-color-ivory-100: #FDFCFA;
+$bq-color-ivory-200: #F2EDE5;
+$bq-color-ivory-300: #F1F1F1;
+$bq-color-ivory-400: #E4DDD0;
+$bq-color-warm-greige: #A09488;
+$bq-color-warm-sand: #A79C80;
+$bq-color-warm-espresso: #342420;
+$bq-color-warm-cream: #F2EDE5;
+$bq-color-feedback-success: #1D6913;
+$bq-color-feedback-warning: #B08C37;
+$bq-color-feedback-danger: #E0475B;
+$bq-color-feedback-info: #4A6478;
+$bq-color-swatch-satin-grey: #404040;
+$bq-color-swatch-champagne: #E8C97A;
+$bq-color-swatch-greige: #A09488;
+$bq-color-swatch-sand: #A79C80;
+$bq-color-swatch-emerald: #1D6913;
+$bq-color-swatch-espresso: #342420;
+$bq-color-swatch-rosewood: #E0475B;
+$bq-color-board-forest: #065400;
+$bq-color-board-crimson: #A30505;
+$bq-color-board-olive: #4F460C;
+$bq-color-board-navy: #001A79;
+$bq-color-pure-black: #000000;
+$bq-color-pure-white: #FFFFFF;
+
+// font
+$bq-font-family-display: 'Playfair Display', 'Amiri', Georgia, 'Times New Roman', serif;
+$bq-font-family-display-sc: 'Playfair Display SC', 'Playfair Display', 'Amiri', Georgia, serif;
+$bq-font-family-label: 'Playfair', 'Playfair Display', 'Tajawal', Georgia, serif;
+$bq-font-family-body: 'Inter', 'Tajawal', 'Helvetica Neue', Arial, sans-serif;
+$bq-font-family-body-mobile: 'Poppins', 'Inter', 'Tajawal', 'Helvetica Neue', Arial, sans-serif;
+$bq-font-size-3xs: 10px;
+$bq-font-size-2xs: 12px;
+$bq-font-size-xs: 14px;
+$bq-font-size-sm: 16px;
+$bq-font-size-md: 18px;
+$bq-font-size-lg: 20px;
+$bq-font-size-xl: 24px;
+$bq-font-size-2xl: 32px;
+$bq-font-size-3xl: 40px;
+$bq-font-size-4xl: 48px;
+$bq-font-size-5xl: 56px;
+$bq-font-size-6xl: 64px;
+$bq-font-weight-regular: 400;
+$bq-font-weight-medium: 500;
+$bq-font-weight-semibold: 600;
+$bq-font-weight-bold: 700;
+$bq-font-weight-extrabold: 800;
+$bq-font-weight-black: 900;
+$bq-font-tracking-tight: 0;
+$bq-font-tracking-label: 0.42px;
+$bq-font-tracking-micro: 0.8px;
+$bq-font-tracking-normal: 0.64px;
+$bq-font-tracking-wide: 0.96px;
+$bq-font-tracking-body: 1.12px;
+$bq-font-tracking-wider: 1.28px;
+$bq-font-tracking-title: 1.6px;
+$bq-font-tracking-heading: 1.92px;
+$bq-font-tracking-widest: 2.56px;
+$bq-font-tracking-hero: 5.12px;
+$bq-font-leading-tight: 1.34;
+$bq-font-leading-snug: 1.38;
+$bq-font-leading-normal: 1.5;
+$bq-font-leading-relaxed: 1.55;
+$bq-font-leading-loose: 2;
+
+// space
+$bq-space-0: 0;
+$bq-space-1: 4px;
+$bq-space-2: 8px;
+$bq-space-3: 12px;
+$bq-space-4: 16px;
+$bq-space-5: 20px;
+$bq-space-6: 24px;
+$bq-space-7: 32px;
+$bq-space-8: 40px;
+$bq-space-9: 48px;
+$bq-space-10: 64px;
+$bq-space-11: 80px;
+$bq-space-12: 120px;
+
+// radius
+$bq-radius-none: 0;
+$bq-radius-xs: 2px;
+$bq-radius-sm: 4px;
+$bq-radius-md: 8px;
+$bq-radius-control: 10px;
+$bq-radius-panel: 14px;
+$bq-radius-lg: 16px;
+$bq-radius-xl: 24px;
+$bq-radius-pill: 999px;
+
+// shadow
+$bq-shadow-gold: 0 12px 32px rgba(232, 201, 122, 0.28);
+
+// duration
+$bq-duration-instant: 120ms;
+$bq-duration-fast: 200ms;
+$bq-duration-base: 320ms;
+$bq-duration-slow: 560ms;
+$bq-duration-reveal: 900ms;
+
+// easing
+$bq-easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
+$bq-easing-decelerate: cubic-bezier(0, 0, 0.2, 1);
+$bq-easing-accelerate: cubic-bezier(0.4, 0, 1, 1);
+$bq-easing-luxe: cubic-bezier(0.16, 1, 0.3, 1);
+
+// breakpoint
+$bq-breakpoint-xs: 480px;
+$bq-breakpoint-sm: 640px;
+$bq-breakpoint-md: 840px;
+$bq-breakpoint-lg: 1080px;
+$bq-breakpoint-xl: 1320px;
+$bq-breakpoint-2xl: 1600px;
+
+// layout
+$bq-layout-container-max: 1320px;
+$bq-layout-gutter: 24px;
+$bq-layout-header-height: 84px;
+$bq-layout-tabbar-height: 68px;
+
+// z
+$bq-z-base: 0;
+$bq-z-sticky: 100;
+$bq-z-header: 200;
+$bq-z-overlay: 800;
+$bq-z-dialog: 900;
+$bq-z-toast: 1000;
+
+// ---------------------------------------------------------------------------
+// Semantic theme variables - resolve to whichever theme is on <html>.
+// Components use these; the raw ramps above are for fixed brand marks only.
+// ---------------------------------------------------------------------------
+$bq-surface-page: var(--bq-surface-page);
+$bq-surface-raised: var(--bq-surface-raised);
+$bq-surface-sunken: var(--bq-surface-sunken);
+$bq-surface-overlay: var(--bq-surface-overlay);
+$bq-surface-inverse: var(--bq-surface-inverse);
+$bq-text-primary: var(--bq-text-primary);
+$bq-text-secondary: var(--bq-text-secondary);
+$bq-text-muted: var(--bq-text-muted);
+$bq-text-faint: var(--bq-text-faint);
+$bq-text-inverse: var(--bq-text-inverse);
+$bq-text-on-accent: var(--bq-text-on-accent);
+$bq-border-subtle: var(--bq-border-subtle);
+$bq-border-strong: var(--bq-border-strong);
+$bq-border-accent: var(--bq-border-accent);
+$bq-accent-base: var(--bq-accent-base);
+$bq-accent-strong: var(--bq-accent-strong);
+$bq-accent-strong-hover: var(--bq-accent-strong-hover);
+$bq-accent-text: var(--bq-accent-text);
+$bq-accent-soft: var(--bq-accent-soft);
+$bq-accent-ring: var(--bq-accent-ring);
+$bq-accent-sheen: var(--bq-accent-sheen);
+$bq-state-success: var(--bq-state-success);
+$bq-state-warning: var(--bq-state-warning);
+$bq-state-danger: var(--bq-state-danger);
+$bq-state-info: var(--bq-state-info);
+$bq-state-danger-ring: var(--bq-state-danger-ring);
+$bq-backdrop: var(--bq-backdrop);
+$bq-shadow-sm: var(--bq-shadow-sm);
+$bq-shadow-md: var(--bq-shadow-md);
+$bq-shadow-lg: var(--bq-shadow-lg);
+
+// ---------------------------------------------------------------------------
+// Custom properties - available at runtime (usable for theming, JS reads).
+// ---------------------------------------------------------------------------
+:root {
+	--bq-color-gold-50: #FBF6EA;
+	--bq-color-gold-100: #F7EDD6;
+	--bq-color-gold-200: #F2E0B4;
+	--bq-color-gold-300: #E8C97A;
+	--bq-color-gold-400: #D6B25F;
+	--bq-color-gold-500: #B08C37;
+	--bq-color-gold-600: #8A6B2A;
+	--bq-color-gold-700: #6B531F;
+	--bq-color-gold-800: #4A3915;
+	--bq-color-gold-900: #2B210C;
+	--bq-color-ink-50: #F1F1F1;
+	--bq-color-ink-100: #F6F6F6;
+	--bq-color-ink-200: #C9C2B8;
+	--bq-color-ink-300: #A09488;
+	--bq-color-ink-400: #979797;
+	--bq-color-ink-500: #676767;
+	--bq-color-ink-600: #404040;
+	--bq-color-ink-700: #333333;
+	--bq-color-ink-800: #1C1C1C;
+	--bq-color-ink-900: #0A0A0C;
+	--bq-color-ivory-50: #FFFFFF;
+	--bq-color-ivory-100: #FDFCFA;
+	--bq-color-ivory-200: #F2EDE5;
+	--bq-color-ivory-300: #F1F1F1;
+	--bq-color-ivory-400: #E4DDD0;
+	--bq-color-warm-greige: #A09488;
+	--bq-color-warm-sand: #A79C80;
+	--bq-color-warm-espresso: #342420;
+	--bq-color-warm-cream: #F2EDE5;
+	--bq-color-feedback-success: #1D6913;
+	--bq-color-feedback-warning: #B08C37;
+	--bq-color-feedback-danger: #E0475B;
+	--bq-color-feedback-info: #4A6478;
+	--bq-color-swatch-satin-grey: #404040;
+	--bq-color-swatch-champagne: #E8C97A;
+	--bq-color-swatch-greige: #A09488;
+	--bq-color-swatch-sand: #A79C80;
+	--bq-color-swatch-emerald: #1D6913;
+	--bq-color-swatch-espresso: #342420;
+	--bq-color-swatch-rosewood: #E0475B;
+	--bq-color-board-forest: #065400;
+	--bq-color-board-crimson: #A30505;
+	--bq-color-board-olive: #4F460C;
+	--bq-color-board-navy: #001A79;
+	--bq-color-pure-black: #000000;
+	--bq-color-pure-white: #FFFFFF;
+	--bq-font-family-display: 'Playfair Display', 'Amiri', Georgia, 'Times New Roman', serif;
+	--bq-font-family-display-sc: 'Playfair Display SC', 'Playfair Display', 'Amiri', Georgia, serif;
+	--bq-font-family-label: 'Playfair', 'Playfair Display', 'Tajawal', Georgia, serif;
+	--bq-font-family-body: 'Inter', 'Tajawal', 'Helvetica Neue', Arial, sans-serif;
+	--bq-font-family-body-mobile: 'Poppins', 'Inter', 'Tajawal', 'Helvetica Neue', Arial, sans-serif;
+	--bq-font-size-3xs: 10px;
+	--bq-font-size-2xs: 12px;
+	--bq-font-size-xs: 14px;
+	--bq-font-size-sm: 16px;
+	--bq-font-size-md: 18px;
+	--bq-font-size-lg: 20px;
+	--bq-font-size-xl: 24px;
+	--bq-font-size-2xl: 32px;
+	--bq-font-size-3xl: 40px;
+	--bq-font-size-4xl: 48px;
+	--bq-font-size-5xl: 56px;
+	--bq-font-size-6xl: 64px;
+	--bq-font-weight-regular: 400;
+	--bq-font-weight-medium: 500;
+	--bq-font-weight-semibold: 600;
+	--bq-font-weight-bold: 700;
+	--bq-font-weight-extrabold: 800;
+	--bq-font-weight-black: 900;
+	--bq-font-tracking-tight: 0;
+	--bq-font-tracking-label: 0.42px;
+	--bq-font-tracking-micro: 0.8px;
+	--bq-font-tracking-normal: 0.64px;
+	--bq-font-tracking-wide: 0.96px;
+	--bq-font-tracking-body: 1.12px;
+	--bq-font-tracking-wider: 1.28px;
+	--bq-font-tracking-title: 1.6px;
+	--bq-font-tracking-heading: 1.92px;
+	--bq-font-tracking-widest: 2.56px;
+	--bq-font-tracking-hero: 5.12px;
+	--bq-font-leading-tight: 1.34;
+	--bq-font-leading-snug: 1.38;
+	--bq-font-leading-normal: 1.5;
+	--bq-font-leading-relaxed: 1.55;
+	--bq-font-leading-loose: 2;
+	--bq-space-0: 0;
+	--bq-space-1: 4px;
+	--bq-space-2: 8px;
+	--bq-space-3: 12px;
+	--bq-space-4: 16px;
+	--bq-space-5: 20px;
+	--bq-space-6: 24px;
+	--bq-space-7: 32px;
+	--bq-space-8: 40px;
+	--bq-space-9: 48px;
+	--bq-space-10: 64px;
+	--bq-space-11: 80px;
+	--bq-space-12: 120px;
+	--bq-radius-none: 0;
+	--bq-radius-xs: 2px;
+	--bq-radius-sm: 4px;
+	--bq-radius-md: 8px;
+	--bq-radius-control: 10px;
+	--bq-radius-panel: 14px;
+	--bq-radius-lg: 16px;
+	--bq-radius-xl: 24px;
+	--bq-radius-pill: 999px;
+	--bq-shadow-gold: 0 12px 32px rgba(232, 201, 122, 0.28);
+	--bq-duration-instant: 120ms;
+	--bq-duration-fast: 200ms;
+	--bq-duration-base: 320ms;
+	--bq-duration-slow: 560ms;
+	--bq-duration-reveal: 900ms;
+	--bq-easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
+	--bq-easing-decelerate: cubic-bezier(0, 0, 0.2, 1);
+	--bq-easing-accelerate: cubic-bezier(0.4, 0, 1, 1);
+	--bq-easing-luxe: cubic-bezier(0.16, 1, 0.3, 1);
+	--bq-breakpoint-xs: 480px;
+	--bq-breakpoint-sm: 640px;
+	--bq-breakpoint-md: 840px;
+	--bq-breakpoint-lg: 1080px;
+	--bq-breakpoint-xl: 1320px;
+	--bq-breakpoint-2xl: 1600px;
+	--bq-layout-container-max: 1320px;
+	--bq-layout-gutter: 24px;
+	--bq-layout-header-height: 84px;
+	--bq-layout-tabbar-height: 68px;
+	--bq-z-base: 0;
+	--bq-z-sticky: 100;
+	--bq-z-header: 200;
+	--bq-z-overlay: 800;
+	--bq-z-dialog: 900;
+	--bq-z-toast: 1000;
+}
+
+
+:root,
+[data-theme="dark"],
+.bq-theme-dark {
+	--bq-surface-page: #0A0A0C;
+	--bq-surface-raised: #141416;
+	--bq-surface-sunken: #1C1C1C;
+	--bq-surface-overlay: #17161A;
+	--bq-surface-inverse: #F2EDE5;
+	--bq-text-primary: #F6F6F6;
+	--bq-text-secondary: #C9C2B8;
+	--bq-text-muted: #A09488;
+	--bq-text-faint: #767472;
+	--bq-text-inverse: #0A0A0C;
+	--bq-text-on-accent: #000000;
+	--bq-border-subtle: #26252A;
+	--bq-border-strong: #3A383F;
+	--bq-border-accent: #E8C97A;
+	--bq-accent-base: #E8C97A;
+	--bq-accent-strong: #E8C97A;
+	--bq-accent-strong-hover: #F2E0B4;
+	--bq-accent-text: #E8C97A;
+	--bq-accent-soft: #241C0E;
+	--bq-accent-ring: rgba(232, 201, 122, 0.32);
+	--bq-accent-sheen: linear-gradient(100deg, #8A6B2A 0%, #E8C97A 38%, #F7EDD6 52%, #D6B25F 72%, #8A6B2A 100%);
+	--bq-state-success: #6FCB5E;
+	--bq-state-warning: #E8C97A;
+	--bq-state-danger: #FF7183;
+	--bq-state-info: #8FB0C9;
+	--bq-state-danger-ring: rgba(255, 113, 131, 0.24);
+	--bq-backdrop: rgba(6, 5, 4, 0.82);
+	--bq-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+	--bq-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+	--bq-shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.62);
+}
+
+[data-theme="light"],
+.bq-theme-light {
+	--bq-surface-page: #FDFCFA;
+	--bq-surface-raised: #FFFFFF;
+	--bq-surface-sunken: #F2EDE5;
+	--bq-surface-overlay: #FFFFFF;
+	--bq-surface-inverse: #0A0A0C;
+	--bq-text-primary: #0A0A0C;
+	--bq-text-secondary: #333333;
+	--bq-text-muted: #676767;
+	--bq-text-faint: #979797;
+	--bq-text-inverse: #F6F6F6;
+	--bq-text-on-accent: #000000;
+	--bq-border-subtle: #E4DDD0;
+	--bq-border-strong: #C9C2B8;
+	--bq-border-accent: #B08C37;
+	--bq-accent-base: #B08C37;
+	--bq-accent-strong: #E8C97A;
+	--bq-accent-strong-hover: #D6B25F;
+	--bq-accent-text: #8A6B2A;
+	--bq-accent-soft: #FBF6EA;
+	--bq-accent-ring: rgba(176, 140, 55, 0.28);
+	--bq-accent-sheen: linear-gradient(100deg, #6B531F 0%, #B08C37 38%, #D6B25F 52%, #8A6B2A 72%, #6B531F 100%);
+	--bq-state-success: #1D6913;
+	--bq-state-warning: #8A6B2A;
+	--bq-state-danger: #C42F43;
+	--bq-state-info: #4A6478;
+	--bq-state-danger-ring: rgba(196, 47, 67, 0.2);
+	--bq-backdrop: rgba(26, 22, 16, 0.45);
+	--bq-shadow-sm: 0 1px 2px rgba(10, 10, 12, 0.06);
+	--bq-shadow-md: 0 8px 24px rgba(10, 10, 12, 0.1);
+	--bq-shadow-lg: 0 24px 60px rgba(10, 10, 12, 0.22);
+}

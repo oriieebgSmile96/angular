@@ -1,0 +1,31 @@
+<header class="head">
+	<p class="bq-eyebrow" bqReveal>{{ section.eyebrow | t }}</p>
+	<h2 class="bq-display-2" bqReveal="rise" [bqRevealDelay]="60">{{ section.heading | t }}</h2>
+</header>
+
+<div class="grid">
+	@for (project of projects; track project.id) {
+		<!-- Each tile is filled edge to edge by its photograph, so the caption keeps
+		     the dark palette regardless of the page theme. -->
+		<article
+			class="card bq-theme-dark"
+			[class]="'card--' + project.tile"
+			bqReveal="scale"
+			[bqRevealIndex]="$index"
+			[bqRevealDelay]="120">
+			<bq-photo class="card-photo" [src]="project.photo.src" [alt]="project.photo.alt | t" ratio="auto" />
+			<span class="tag">{{ project.tag | t }}</span>
+			<div class="caption">
+				<h3 class="card-title">{{ project.title | t }}</h3>
+				<p class="card-location">{{ project.location | t }}</p>
+			</div>
+			<span class="cue" aria-hidden="true"><bq-icon name="arrow-right" [size]="18" /></span>
+		</article>
+	}
+</div>
+
+<div class="foot" bqReveal [bqRevealDelay]="120">
+	<button bqButton="ghost" size="lg" type="button" (click)="viewAllRequested.emit()">
+		{{ "portfolio.viewAll" | t }}
+	</button>
+</div>

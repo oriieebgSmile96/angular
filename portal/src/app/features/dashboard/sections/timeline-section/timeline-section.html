@@ -1,0 +1,59 @@
+<header class="intro">
+	<p class="bq-eyebrow" bqReveal>{{ "timeline.eyebrow" | t }}</p>
+	<h2 class="bq-section-heading" bqReveal="rise" [bqRevealDelay]="60">
+		{{ "timeline.heading" | t }}
+	</h2>
+	<p class="bq-lede" bqReveal [bqRevealDelay]="120">
+		{{ "timeline.lede" | t: { project: project.name | t, location: project.location | t } }}
+	</p>
+</header>
+
+<ol class="stages" bqReveal="fade">
+	@for (stage of stages(); track stage.id) {
+		<li
+			class="stage"
+			[class]="'stage--' + stage.status"
+			bqReveal
+			[bqRevealIndex]="$index"
+			[style.--bq-fill.%]="stage.completion">
+			<span class="medallion" aria-hidden="true">
+				@if (stage.status === "completed") {
+					<bq-icon name="check" [size]="22" [strokeWidth]="2" />
+				} @else {
+					{{ stage.ordinal }}
+				}
+			</span>
+
+			<div class="detail">
+				<p class="status">
+					<bq-icon [name]="stage.statusIcon" [size]="14" [strokeWidth]="2" />
+					{{ stage.statusLabel | t }}
+				</p>
+				<h3 class="title">{{ stage.title | t }}</h3>
+				<p class="summary">{{ stage.summary | t }}</p>
+			</div>
+
+			<p class="date bq-numeric">{{ stage.date }}</p>
+
+			@if (stage.showProgress) {
+				<div class="progress">
+					<p class="bq-micro-label">{{ "timeline.completion" | t }}</p>
+					<p class="bq-micro-label percent">{{ stage.completion }}%</p>
+					<div
+						class="track"
+						role="progressbar"
+						[attr.aria-valuenow]="stage.completion"
+						aria-valuemin="0"
+						aria-valuemax="100"
+						[attr.aria-label]="
+							'timeline.progressLabel' | t: { stage: stage.title | t, percent: stage.completion }
+						">
+						<!-- Width comes from `--bq-fill` on the stage rather than an inline
+						     style, so the bar can run out to it as the row arrives. -->
+						<span class="fill"></span>
+					</div>
+				</div>
+			}
+		</li>
+	}
+</ol>

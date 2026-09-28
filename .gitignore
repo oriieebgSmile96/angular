@@ -1,0 +1,22 @@
+node_modules/
+.DS_Store
+*.log
+
+# Angular
+web/.angular/
+web/dist/
+portal/.angular/
+portal/dist/
+
+# Expo
+mobile/.expo/
+mobile/.expo-export/
+mobile/dist/
+mobile/android/
+mobile/ios/
+
+# Editors
+.idea/
+*.swp
+.vscode/
+.cursor/

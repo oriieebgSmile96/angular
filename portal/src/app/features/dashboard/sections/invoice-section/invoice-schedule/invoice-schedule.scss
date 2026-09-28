@@ -1,0 +1,83 @@
+@use "styles/tokens" as *;
+@use "styles/mixins" as *;
+
+:host {
+	display: grid;
+	gap: $bq-space-4;
+	align-content: start;
+}
+
+.assistive {
+	@include visually-hidden;
+}
+
+.instalments {
+	display: grid;
+	gap: $bq-space-3;
+}
+
+.instalment {
+	display: flex;
+	gap: $bq-space-4;
+	align-items: center;
+	justify-content: space-between;
+	min-block-size: 56px;
+	padding-inline: $bq-space-4;
+
+	@include panel(2%, 12%);
+
+	border-radius: $bq-radius-md;
+
+	dt {
+		color: $bq-text-secondary;
+		font-family: $bq-font-family-body;
+		font-size: $bq-font-size-xs;
+	}
+
+	// Scheduled is the resting case, so the two states that need attention are
+	// the only ones that have to say anything.
+	dd {
+		color: $bq-accent-text;
+		font-size: $bq-font-size-xs;
+		font-weight: $bq-font-weight-semibold;
+		white-space: nowrap;
+	}
+}
+
+.instalment--paid dd {
+	color: $bq-state-success;
+}
+
+.instalment--due dd {
+	color: $bq-accent-base;
+}
+
+.balance {
+	display: flex;
+	gap: $bq-space-4;
+	align-items: center;
+	justify-content: space-between;
+	min-block-size: 78px;
+	margin-block-start: $bq-space-2;
+	padding-inline: $bq-space-5;
+
+	@include panel(10%, 32%);
+
+	border-radius: $bq-radius-md;
+}
+
+.balance-label {
+	color: $bq-text-primary;
+	font-family: $bq-font-family-display;
+	font-size: $bq-font-size-sm;
+	font-weight: $bq-font-weight-bold;
+}
+
+.balance-amount {
+	color: $bq-accent-text;
+	font-family: $bq-font-family-display;
+	font-size: $bq-font-size-lg;
+	font-weight: $bq-font-weight-extrabold;
+	font-variant-numeric: tabular-nums;
+	white-space: nowrap;
+}

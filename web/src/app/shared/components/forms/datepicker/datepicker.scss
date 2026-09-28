@@ -1,0 +1,44 @@
+@use "styles/tokens" as *;
+@use "styles/control" as *;
+
+:host {
+	@include control-host;
+}
+
+@include control-shell;
+
+.bq-datepicker__trigger {
+	width: 100%;
+	justify-content: space-between;
+	text-align: start;
+	cursor: pointer;
+
+	&.is-open {
+		border-color: $bq-border-accent;
+	}
+}
+
+.bq-datepicker__value {
+	flex: 1;
+	min-width: 0;
+	overflow: hidden;
+	color: $bq-text-primary;
+	font-family: $bq-font-family-body;
+	font-size: $bq-font-size-xs;
+	letter-spacing: $bq-font-tracking-body;
+	text-align: start;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	&.is-placeholder {
+		color: $bq-text-faint;
+	}
+}
+
+/* Declared in this component's template, then moved into the overlay container —
+   emulated encapsulation follows it there. */
+.bq-datepicker__panel {
+	@include control-panel;
+
+	width: 320px;
+}

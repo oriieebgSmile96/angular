@@ -1,0 +1,60 @@
+@use "tokens" as *;
+@use "mixins" as *;
+
+.bq-eyebrow {
+	@include eyebrow;
+
+	&--bright {
+		color: $bq-accent-base;
+	}
+}
+
+/* Hero scale: Playfair Display SC 900 at 64 / 5.12 tracking on wide viewports. */
+.bq-display-1 {
+	@include display($bq-font-size-3xl, $bq-font-tracking-widest);
+
+	font-family: $bq-font-family-display-sc;
+	text-transform: uppercase;
+
+	@include from("md") {
+		font-size: $bq-font-size-4xl;
+		letter-spacing: $bq-font-tracking-hero;
+	}
+
+	@include from("lg") {
+		font-size: $bq-font-size-6xl;
+	}
+}
+
+.bq-display-2 {
+	@include display($bq-font-size-xl);
+
+	color: $bq-accent-text;
+	text-transform: uppercase;
+
+	@include from("md") {
+		font-size: $bq-font-size-2xl;
+	}
+}
+
+.bq-display-3 {
+	@include display($bq-font-size-lg, $bq-font-tracking-heading);
+}
+
+.bq-gold {
+	@include gold-text;
+}
+
+.bq-lede {
+	max-width: 62ch;
+	margin: 0;
+	color: $bq-text-muted;
+	font-family: $bq-font-family-body;
+	font-size: $bq-font-size-xs;
+	letter-spacing: $bq-font-tracking-body;
+	line-height: $bq-font-leading-normal;
+}
+
+.bq-visually-hidden {
+	@include visually-hidden;
+}

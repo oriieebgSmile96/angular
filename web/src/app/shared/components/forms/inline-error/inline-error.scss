@@ -1,0 +1,16 @@
+@use "styles/tokens" as *;
+
+:host {
+	display: block;
+}
+
+.bq-inline-error__text {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin: 0;
+	color: $bq-state-danger;
+	font-family: $bq-font-family-body;
+	font-size: $bq-font-size-2xs;
+	letter-spacing: $bq-font-tracking-wide;
+}

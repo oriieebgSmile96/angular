@@ -1,0 +1,67 @@
+<bq-field-label [text]="label()" [htmlFor]="inputId" [labelId]="inputId + '-label'" [required]="isRequired" />
+
+<div
+	class="bq-control"
+	[class.is-invalid]="isInvalid"
+	[class.is-disabled]="isDisabled"
+	[class.is-readonly]="readonly()"
+	[class.is-textarea]="kind() === 'textarea'">
+	<span class="bq-control__lead"><ng-content select="[bqPrefix]" /></span>
+
+	@if (kind() === "textbox") {
+		<input
+			class="bq-control__input"
+			[id]="inputId"
+			[type]="htmlType()"
+			[placeholder]="placeholder()"
+			[readonly]="readonly()"
+			[autocomplete]="autocomplete()"
+			[formControl]="control"
+			[attr.inputmode]="inputMode()"
+			[attr.maxlength]="maxLength()"
+			[attr.aria-required]="isRequired || null"
+			[attr.aria-invalid]="isInvalid || null"
+			[attr.aria-describedby]="describedBy ?? hintId"
+			(blur)="onBlur()"
+			(keyup.enter)="committed.emit(control.value)" />
+	} @else {
+		<textarea
+			class="bq-control__input bq-control__input--textarea"
+			[id]="inputId"
+			[rows]="rows()"
+			[placeholder]="placeholder()"
+			[readonly]="readonly()"
+			[formControl]="control"
+			[attr.maxlength]="maxLength()"
+			[attr.aria-required]="isRequired || null"
+			[attr.aria-invalid]="isInvalid || null"
+			[attr.aria-describedby]="describedBy ?? hintId"
+			(blur)="onBlur()"></textarea>
+	}
+
+	<span class="bq-control__trail">
+		@if (isPassword()) {
+			<button
+				class="bq-control__toggle"
+				type="button"
+				[disabled]="isDisabled || readonly()"
+				[attr.aria-pressed]="passwordVisible()"
+				[attr.aria-label]="(passwordVisible() ? 'field.hidePassword' : 'field.showPassword') | t"
+				(click)="togglePasswordVisibility()">
+				<bq-icon name="eye" [size]="18" />
+			</button>
+		}
+		<ng-content select="[bqSuffix]" />
+	</span>
+</div>
+
+@if (isInvalid) {
+	<bq-inline-error [message]="control.errors | validationMessage" [errorId]="errorId" />
+} @else if (hint() || showCharCount()) {
+	<p class="bq-control__hint" [id]="hintId">
+		<span>{{ hint() }}</span>
+		@if (showCharCount() && maxLength()) {
+			<span class="bq-control__counter" aria-live="polite">{{ charCount }}/{{ maxLength() }}</span>
+		}
+	</p>
+}

@@ -1,0 +1,22 @@
+<div class="inner">
+	<h2 class="bq-display-2 heading" bqReveal="rise">{{ section.heading | t }}</h2>
+
+	<figure class="quote" bqReveal [bqRevealDelay]="80">
+		<bq-icon class="mark" name="quote" [size]="32" />
+		<blockquote>{{ current().quote | t }}</blockquote>
+		<figcaption>{{ current().author | t }} - {{ current().role | t }}</figcaption>
+	</figure>
+
+	<div class="dots" role="tablist" bqReveal [bqRevealDelay]="180" [attr.aria-label]="'testimonials.choose' | t">
+		@for (testimonial of testimonials; track testimonial.author.en) {
+			<button
+				class="dot"
+				type="button"
+				role="tab"
+				[class.is-active]="index() === $index"
+				[attr.aria-selected]="index() === $index"
+				[attr.aria-label]="'testimonials.from' | t: { author: testimonial.author | t }"
+				(click)="index.set($index)"></button>
+		}
+	</div>
+</div>

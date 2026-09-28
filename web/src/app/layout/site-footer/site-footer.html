@@ -1,0 +1,28 @@
+<div class="inner">
+	<div class="about" bqReveal [bqRevealIndex]="0">
+		<bq-brand-mark />
+		<p class="blurb">{{ atelier.summary | t }}</p>
+	</div>
+
+	<nav class="column" bqReveal [bqRevealIndex]="1" [attr.aria-label]="'footer.quickLinks' | t">
+		<h2 class="column-title">{{ "footer.quickLinks" | t }}</h2>
+		@for (link of quickLinks; track link.fragment) {
+			<a class="column-link" routerLink="/" [fragment]="link.fragment">{{ link.label | t }}</a>
+		}
+	</nav>
+
+	<div class="column" id="contact" bqReveal [bqRevealIndex]="2">
+		<h2 class="column-title">{{ "footer.contact" | t }}</h2>
+		<p class="column-text">{{ atelier.location | t }}</p>
+		<a class="column-link" [href]="'tel:' + atelier.phone" dir="ltr">{{ atelier.phone }}</a>
+		<a class="column-link" [href]="'mailto:' + atelier.email" dir="ltr">{{ atelier.email }}</a>
+		<a class="column-link" href="https://instagram.com" target="_blank" rel="noopener">
+			{{ atelier.instagram | t }}
+		</a>
+	</div>
+</div>
+
+<div class="baseline" bqReveal="fade" [bqRevealDelay]="200">
+	<p>{{ atelier.registration | t }}</p>
+	<p>{{ atelier.portalNote | t }}</p>
+</div>

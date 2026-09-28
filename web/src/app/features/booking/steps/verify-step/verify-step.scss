@@ -1,0 +1,84 @@
+@use "styles/tokens" as *;
+@use "styles/mixins" as *;
+
+:host {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: $bq-space-4;
+	text-align: center;
+}
+
+.intro {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: $bq-space-2;
+}
+
+.title {
+	@include display($bq-font-size-xl);
+
+	color: $bq-text-primary;
+	text-transform: uppercase;
+
+	@include from("sm") {
+		font-size: $bq-font-size-2xl;
+	}
+}
+
+.lede {
+	color: $bq-text-muted;
+	font-size: $bq-font-size-xs;
+}
+
+.mobile {
+	color: $bq-text-primary;
+	font-size: $bq-font-size-lg;
+	font-weight: $bq-font-weight-medium;
+	letter-spacing: $bq-font-tracking-wide;
+}
+
+.meta {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	justify-content: center;
+	gap: $bq-space-2;
+	color: $bq-text-muted;
+	font-size: $bq-font-size-3xs;
+}
+
+.expired {
+	color: $bq-state-danger;
+}
+
+.feedback {
+	justify-content: center;
+}
+
+.demo {
+	display: flex;
+	align-items: center;
+	gap: $bq-space-2;
+	padding: $bq-space-2 $bq-space-4;
+	border: 1px dashed $bq-border-accent;
+	background-color: $bq-accent-soft;
+	color: $bq-text-muted;
+	font-size: $bq-font-size-3xs;
+
+	strong {
+		color: $bq-text-primary;
+		font-size: $bq-font-size-xs;
+		letter-spacing: $bq-font-tracking-wider;
+	}
+}
+
+.footnote {
+	color: $bq-text-muted;
+	font-size: $bq-font-size-xs;
+}
+
+button[bqButton="primary"] {
+	margin-top: $bq-space-2;
+}

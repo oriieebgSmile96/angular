@@ -1,0 +1,102 @@
+@use "tokens" as *;
+@use "mixins" as *;
+
+.bq-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: $bq-space-2;
+	min-height: 48px;
+	padding-inline: $bq-space-6;
+	border: 1px solid transparent;
+	border-radius: $bq-radius-none;
+	font-family: $bq-font-family-label;
+	font-size: $bq-font-size-xs;
+	font-weight: $bq-font-weight-bold;
+	letter-spacing: $bq-font-tracking-tight;
+	text-align: center;
+	text-transform: uppercase;
+	white-space: nowrap;
+	cursor: pointer;
+	transition:
+		background-color $bq-duration-fast $bq-easing-standard,
+		border-color $bq-duration-fast $bq-easing-standard,
+		color $bq-duration-fast $bq-easing-standard,
+		box-shadow $bq-duration-base $bq-easing-luxe,
+		transform $bq-duration-fast $bq-easing-standard;
+
+	@include focus-ring;
+
+	&:disabled,
+	&[aria-disabled="true"] {
+		opacity: 0.45;
+		cursor: not-allowed;
+		box-shadow: none;
+		transform: none;
+	}
+
+	&--sm {
+		min-height: 38px;
+		padding-inline: $bq-space-4;
+		font-size: $bq-font-size-3xs;
+	}
+
+	&--lg {
+		min-height: 56px;
+		padding-inline: $bq-space-8;
+		font-size: $bq-font-size-sm;
+	}
+
+	&--block {
+		display: flex;
+		width: 100%;
+	}
+
+	&--primary {
+		background-color: $bq-accent-strong;
+		color: $bq-text-on-accent;
+
+		&:hover:not(:disabled) {
+			background-color: $bq-accent-strong-hover;
+			box-shadow: $bq-shadow-gold;
+			transform: translateY(-1px);
+		}
+
+		&:active:not(:disabled) {
+			transform: translateY(0);
+		}
+	}
+
+	&--outline {
+		border-color: currentcolor;
+		color: $bq-accent-text;
+
+		&:hover:not(:disabled) {
+			background-color: $bq-accent-soft;
+		}
+	}
+
+	&--ghost {
+		border-color: $bq-border-accent;
+		color: $bq-accent-text;
+		font-weight: $bq-font-weight-semibold;
+
+		&:hover:not(:disabled) {
+			background-color: $bq-accent-soft;
+		}
+	}
+
+	&--link {
+		min-height: 0;
+		padding: 0;
+		color: $bq-accent-text;
+		letter-spacing: $bq-font-tracking-wide;
+		text-transform: none;
+		text-decoration: underline;
+		text-underline-offset: 4px;
+
+		&:hover:not(:disabled) {
+			color: $bq-accent-base;
+		}
+	}
+}

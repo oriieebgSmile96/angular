@@ -1,0 +1,18 @@
+<h3 class="bq-micro-label">{{ "invoice.schedule" | t }}</h3>
+
+<dl class="instalments">
+	@for (instalment of instalments(); track instalment.id) {
+		<div class="instalment" [class]="'instalment--' + instalment.state" bqReveal [bqRevealIndex]="$index">
+			<dt>
+				{{ instalment.label | t }}
+				<span class="assistive">{{ instalment.stateLabel | t }}</span>
+			</dt>
+			<dd class="bq-numeric">{{ instalment.amount }}</dd>
+		</div>
+	}
+</dl>
+
+<p class="balance" bqReveal="scale" [bqRevealDelay]="240">
+	<span class="balance-label">{{ "invoice.balanceDue" | t }}</span>
+	<span class="balance-amount">{{ total() }}</span>
+</p>

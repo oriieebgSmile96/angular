@@ -1,0 +1,10 @@
+<label class="bq-field-label__text" [attr.for]="htmlFor()" [attr.id]="labelId()">
+	{{ text() }}
+	@if (required()) {
+		<span class="bq-field-label__star" aria-hidden="true">*</span>
+		<span class="bq-visually-hidden">{{ "field.required" | t }}</span>
+	}
+</label>
+@if (subText()) {
+	<span class="bq-field-label__sub">{{ subText() }}</span>
+}

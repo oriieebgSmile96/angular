@@ -1,0 +1,35 @@
+<label class="bq-checkbox__row" [attr.for]="inputId">
+	<input
+		class="bq-checkbox__native"
+		type="checkbox"
+		[id]="inputId"
+		[checked]="isChecked"
+		[disabled]="isDisabled"
+		[attr.aria-required]="isRequired || null"
+		[attr.aria-invalid]="isInvalid || null"
+		[attr.aria-describedby]="describedBy"
+		(change)="onToggle($event)"
+		(blur)="markControlTouched()" />
+
+	<span class="bq-checkbox__box" [class.is-checked]="isChecked" [class.is-invalid]="isInvalid" aria-hidden="true">
+		@if (isChecked) {
+			<bq-icon name="check" [size]="14" [strokeWidth]="3" />
+		}
+	</span>
+
+	<span class="bq-checkbox__copy">
+		<span class="bq-checkbox__label">
+			{{ label() }}
+			@if (isRequired) {
+				<span class="bq-checkbox__star" aria-hidden="true">*</span>
+			}
+		</span>
+		@if (description()) {
+			<span class="bq-checkbox__description">{{ description() }}</span>
+		}
+	</span>
+</label>
+
+@if (isInvalid) {
+	<bq-inline-error [message]="control.errors | validationMessage" [errorId]="errorId" />
+}

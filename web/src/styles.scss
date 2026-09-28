@@ -1,0 +1,18 @@
+@use "styles/fonts";
+@use "styles/tokens";
+@use "styles/reset";
+@use "styles/typography";
+@use "styles/button";
+@use "styles/motion";
+@use "styles/form";
+@use "styles/tokens" as *;
+
+.bq-overlay-backdrop {
+	background-color: $bq-backdrop;
+	backdrop-filter: blur(3px);
+}
+
+.cdk-overlay-pane.bq-dialog-pane {
+	max-width: min(920px, calc(100vw - #{$bq-space-6}));
+	max-height: calc(100dvh - #{$bq-space-8});
+}

@@ -1,0 +1,50 @@
+@use "styles/tokens" as *;
+@use "styles/mixins" as *;
+
+:host {
+	display: block;
+}
+
+.boxes {
+	display: flex;
+	justify-content: center;
+	gap: $bq-space-3;
+	direction: ltr;
+}
+
+.box {
+	width: 48px;
+	height: 54px;
+	padding: 0;
+	border: 1px solid $bq-border-subtle;
+	background-color: $bq-surface-raised;
+	color: $bq-text-primary;
+	font-family: $bq-font-family-body;
+	font-size: $bq-font-size-lg;
+	font-weight: $bq-font-weight-medium;
+	text-align: center;
+	caret-color: $bq-accent-base;
+	transition:
+		border-color $bq-duration-fast $bq-easing-standard,
+		background-color $bq-duration-fast $bq-easing-standard;
+
+	@include focus-ring($bq-accent-base, 2px);
+
+	&.is-filled {
+		border-color: $bq-border-accent;
+		background-color: $bq-surface-sunken;
+	}
+
+	&:disabled {
+		opacity: 0.6;
+	}
+
+	@include until("sm") {
+		width: 42px;
+		height: 48px;
+	}
+}
+
+:host(.is-invalid) .box {
+	border-color: $bq-state-danger;
+}

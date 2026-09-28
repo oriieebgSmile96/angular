@@ -1,0 +1,146 @@
+@use "tokens" as *;
+
+/**
+ * The portal's motion layer.
+ *
+ * Everything here is gated on `.bq-motion`, which the inline script in
+ * `index.html` puts on `<html>` before first paint and only when the visitor has
+ * not asked for reduced motion. Two things follow from that: there is no flash
+ * of hidden content while Angular boots, and a visitor who never gets the class
+ * — no JavaScript, reduced motion, an old browser — reads a completely static
+ * page rather than a blank one.
+ *
+ * Nothing below is allowed to be load-bearing. Motion states opacity and
+ * transform only; no layout, no colour, no content.
+ */
+
+/// Wrap anything decorative that moves. Silent for a visitor who wants stillness.
+@mixin motion-safe {
+	@media (prefers-reduced-motion: no-preference) {
+		@content;
+	}
+}
+
+// ---------------------------------------------------------------------------
+// Scroll reveal — driven by `bqReveal`.
+// ---------------------------------------------------------------------------
+
+.bq-motion [data-bq-reveal] {
+	--bq-reveal-delay: 0ms;
+	--bq-reveal-shift: #{$bq-space-6};
+	--bq-reveal-scale: 1;
+
+	opacity: 0;
+	transform: translate3d(0, var(--bq-reveal-shift), 0) scale(var(--bq-reveal-scale));
+	transition:
+		opacity $bq-duration-slow $bq-easing-luxe var(--bq-reveal-delay),
+		transform $bq-duration-slow $bq-easing-luxe var(--bq-reveal-delay);
+
+	&.is-inview {
+		opacity: 1;
+		transform: none;
+	}
+
+	// Travels further, for a heading that should read as being set down.
+	&[data-bq-reveal="rise"] {
+		--bq-reveal-shift: #{$bq-space-8};
+	}
+
+	// Settles inward. Suits a card or a colour swatch.
+	&[data-bq-reveal="scale"] {
+		--bq-reveal-shift: #{$bq-space-4};
+		--bq-reveal-scale: 0.97;
+	}
+
+	// Moves nothing. For anything already in position that would only jitter.
+	&[data-bq-reveal="fade"] {
+		--bq-reveal-shift: 0;
+	}
+}
+
+// `will-change` is a scarce resource — promoting three dozen elements for the
+// life of the page costs more than the compositing it buys. Claim it only while
+// an element is still waiting to move, and drop it the moment it has arrived.
+.bq-motion [data-bq-reveal]:not(.is-inview) {
+	will-change: opacity, transform;
+}
+
+// ---------------------------------------------------------------------------
+// Keyframes.
+// ---------------------------------------------------------------------------
+
+/// The tick on a completed stage, and on a board the client has just approved.
+@keyframes bq-check-pop {
+	0% {
+		opacity: 0;
+		transform: scale(0.4);
+	}
+
+	60% {
+		opacity: 1;
+		transform: scale(1.15);
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes bq-fade-in {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+/// The slow breath on a stage that is currently being worked on.
+@keyframes bq-pulse {
+	0%,
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	50% {
+		opacity: 0.45;
+		transform: scale(0.82);
+	}
+}
+
+/// A gold sheen crossing a surface once, as it arrives.
+@keyframes bq-sheen {
+	from {
+		transform: translateX(-120%);
+	}
+
+	to {
+		transform: translateX(220%);
+	}
+}
+
+/// The bead and rules of a section divider drawing outward from the centre.
+@keyframes bq-draw {
+	from {
+		transform: scaleX(0);
+	}
+
+	to {
+		transform: scaleX(1);
+	}
+}
+
+@keyframes bq-bead-in {
+	from {
+		opacity: 0;
+		transform: scale(0);
+	}
+
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}

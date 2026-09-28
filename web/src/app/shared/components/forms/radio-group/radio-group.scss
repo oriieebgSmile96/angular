@@ -1,0 +1,115 @@
+@use "styles/tokens" as *;
+@use "styles/mixins" as *;
+
+:host {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.bq-radio-group__options {
+	display: flex;
+	gap: $bq-space-3;
+
+	&.is-stack {
+		flex-direction: column;
+	}
+
+	&.is-inline,
+	&.is-cards {
+		flex-wrap: wrap;
+	}
+}
+
+.bq-radio {
+	display: flex;
+	align-items: flex-start;
+	gap: $bq-space-3;
+	cursor: pointer;
+
+	&.is-disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
+
+	.is-cards & {
+		flex: 1 1 180px;
+		padding: $bq-space-4;
+		border: 1px solid $bq-border-subtle;
+		border-radius: $bq-radius-control;
+		background-color: $bq-surface-raised;
+		transition:
+			border-color $bq-duration-fast $bq-easing-standard,
+			background-color $bq-duration-fast $bq-easing-standard;
+
+		&:hover:not(.is-disabled) {
+			border-color: $bq-border-accent;
+		}
+
+		&.is-selected {
+			border-color: $bq-border-accent;
+			background-color: $bq-accent-soft;
+		}
+	}
+}
+
+.bq-radio__native {
+	@include visually-hidden;
+}
+
+.bq-radio__dot {
+	position: relative;
+	width: 18px;
+	height: 18px;
+	flex-shrink: 0;
+	margin-top: 2px;
+	border: 1px solid $bq-border-subtle;
+	border-radius: $bq-radius-pill;
+	background-color: $bq-surface-raised;
+	transition: border-color $bq-duration-fast $bq-easing-standard;
+
+	.bq-radio__native:focus-visible + & {
+		outline: 2px solid $bq-accent-base;
+		outline-offset: 2px;
+	}
+
+	.is-selected & {
+		border-color: $bq-border-accent;
+
+		&::after {
+			position: absolute;
+			background-color: $bq-accent-base;
+			border-radius: $bq-radius-pill;
+			content: "";
+			inset: 3px;
+		}
+	}
+}
+
+.bq-radio__copy {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.bq-radio__label {
+	color: $bq-text-primary;
+	font-family: $bq-font-family-body;
+	font-size: $bq-font-size-xs;
+	letter-spacing: $bq-font-tracking-wide;
+}
+
+.bq-radio__description {
+	color: $bq-text-muted;
+	font-family: $bq-font-family-body;
+	font-size: $bq-font-size-2xs;
+	line-height: $bq-font-leading-normal;
+}
+
+.bq-radio-group__hint {
+	margin: 0;
+	color: $bq-text-muted;
+	font-family: $bq-font-family-body;
+	font-size: $bq-font-size-3xs;
+	letter-spacing: $bq-font-tracking-micro;
+}

@@ -1,0 +1,81 @@
+@use "styles/tokens" as *;
+@use "styles/mixins" as *;
+
+:host {
+	@include section-padding;
+
+	display: block;
+	background-color: $bq-surface-sunken;
+}
+
+.head {
+	@include container;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: $bq-space-2;
+	margin-bottom: $bq-space-9;
+	color: $bq-text-primary;
+	text-align: center;
+}
+
+.steps {
+	@include container;
+
+	display: grid;
+	margin: 0;
+	padding: 0;
+	gap: $bq-space-6;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	list-style: none;
+
+	@include from("md") {
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+	}
+}
+
+.step {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: $bq-space-3;
+	text-align: center;
+}
+
+.seal {
+	display: grid;
+	width: 64px;
+	height: 64px;
+	place-items: center;
+
+	/* Fixed brand medallion: the struck-gold rim and fill read the same in both themes. */
+	border: 1px solid $bq-color-gold-600;
+	border-radius: $bq-radius-pill;
+	background: radial-gradient(circle at 30% 25%, $bq-color-gold-300, $bq-color-gold-600 78%);
+	color: $bq-text-on-accent;
+	transition:
+		box-shadow $bq-duration-base $bq-easing-luxe,
+		transform $bq-duration-base $bq-easing-luxe;
+}
+
+.step:hover .seal {
+	box-shadow: $bq-shadow-gold;
+	transform: translateY(-3px);
+}
+
+.step-title {
+	color: $bq-text-primary;
+	font-family: $bq-font-family-body;
+	font-size: $bq-font-size-2xs;
+	font-weight: $bq-font-weight-medium;
+	letter-spacing: $bq-font-tracking-wider;
+	text-transform: uppercase;
+}
+
+.step-copy {
+	max-width: 26ch;
+	color: $bq-text-muted;
+	font-size: $bq-font-size-3xs;
+	line-height: $bq-font-leading-normal;
+}
